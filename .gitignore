@@ -1,0 +1,16 @@
+# 原始未壓縮形象照（網站實際用的是壓縮後的 hero.jpg，這張留在本機備份用）
+images/S__74039298.jpg
+
+# 系統雜檔
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+
+# 編輯器
+.vscode/
+.idea/
+
+# 保險：這個專案不該有任何環境變數檔，真的出現也不要進版控
+.env
+.env.*
