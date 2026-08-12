@@ -463,6 +463,23 @@
         <li class="cart-empty">尚未選購商品</li>
       </ul>
       <div class="cart-total">總計：NT$ <span id="cart-total">0</span></div>
+
+      <fieldset class="shipping-picker">
+        <legend>配送方式</legend>
+        <label>
+          <input type="radio" name="shipping" value="全家便利商店 冷凍取貨" data-threshold="1300" checked>
+          <span>全家便利商店</span>
+        </label>
+        <label>
+          <input type="radio" name="shipping" value="7-ELEVEN 冷凍取貨" data-threshold="1300">
+          <span>7-ELEVEN</span>
+        </label>
+        <label>
+          <input type="radio" name="shipping" value="黑貓宅急便 冷凍宅配" data-threshold="3300">
+          <span>黑貓宅急便</span>
+        </label>
+      </fieldset>
+
       <p id="shipping-hint" class="shipping-hint"></p>
       <a id="cart-line-btn" class="btn btn-line" href="https://lin.ee/PQPzlSx" target="_blank" rel="noopener">加LINE送出訂單</a>
     </div>

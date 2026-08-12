@@ -2,8 +2,6 @@
   // 加好友用官方短連結；送出訂單必須用 oaMessage 格式才能帶入訂單內容
   const LINE_ID = "@727qzmzu";
   const LINE_ADD_URL = "https://lin.ee/PQPzlSx";
-  const FREE_PICKUP = 1300;
-  const FREE_DELIVERY = 3300;
   const cart = {};
 
   const cartListEl = document.getElementById("cart-list");
@@ -13,6 +11,16 @@
   const miniCartEl = document.getElementById("mini-cart");
   const miniCountEl = document.getElementById("mini-cart-count");
   const miniTotalEl = document.getElementById("mini-cart-total");
+  const shippingRadios = document.querySelectorAll('input[name="shipping"]');
+
+  /** 目前選的配送方式：超商門檻 $1300、黑貓門檻 $3300，兩者不同 */
+  function selectedShipping() {
+    const picked = document.querySelector('input[name="shipping"]:checked');
+    return {
+      label: picked.value,
+      threshold: Number(picked.dataset.threshold),
+    };
+  }
 
   function renderCart() {
     const items = Object.values(cart);
@@ -52,14 +60,13 @@
   }
 
   function renderShippingHint(total) {
+    const { threshold } = selectedShipping();
     if (total === 0) {
       shippingHintEl.textContent = "";
-    } else if (total < FREE_PICKUP) {
-      shippingHintEl.textContent = `再 NT$${FREE_PICKUP - total} 享超商冷凍取貨免運`;
-    } else if (total < FREE_DELIVERY) {
-      shippingHintEl.textContent = `已達超商冷凍取貨免運！再 NT$${FREE_DELIVERY - total} 享黑貓冷凍宅配免運`;
+    } else if (total < threshold) {
+      shippingHintEl.textContent = `再 NT$${threshold - total} 這個配送方式就免運`;
     } else {
-      shippingHintEl.textContent = "已達黑貓冷凍宅配免運！";
+      shippingHintEl.textContent = "已達免運門檻！";
     }
   }
 
@@ -71,7 +78,11 @@
     const lines = items.map(
       (i) => `${i.name}（${i.variant}）x${i.qty}　NT$${i.price * i.qty}`
     );
-    const message = "您好，我想訂購：\n" + lines.join("\n") + `\n合計：NT$${total}`;
+    const message =
+      "您好，我想訂購：\n" +
+      lines.join("\n") +
+      `\n合計：NT$${total}` +
+      `\n配送方式：${selectedShipping().label}`;
     cartLineBtn.href = `https://line.me/R/oaMessage/${LINE_ID}/?${encodeURIComponent(message)}`;
   }
 
@@ -89,6 +100,11 @@
       cart[key].qty += 1;
       renderCart();
     });
+  });
+
+  // 換配送方式要重算免運提示與訂單文字
+  shippingRadios.forEach((radio) => {
+    radio.addEventListener("change", renderCart);
   });
 
   cartListEl.addEventListener("click", (e) => {
