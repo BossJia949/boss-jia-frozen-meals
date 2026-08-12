@@ -51,7 +51,10 @@
 </head>
 <body>
 
-<header class="site-header" id="top">
+<!-- 注意：不要在這裡放 id="top"。頁首是 position:sticky，永遠貼在視窗頂端，
+     瀏覽器會判定「錨點已經在畫面上」而完全不捲動，回頂端就變成按了沒反應。
+     拿掉 id 之後，#top 會走 HTML 規格的預設行為＝捲到文件最上方。 -->
+<header class="site-header">
   <div class="container header-inner">
     <a class="brand" href="#top">老闆家</a>
     <nav class="nav-links">
