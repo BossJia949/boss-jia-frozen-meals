@@ -51,9 +51,9 @@
 </head>
 <body>
 
-<header class="site-header">
+<header class="site-header" id="top">
   <div class="container header-inner">
-    <span class="brand">老闆家</span>
+    <a class="brand" href="#top">老闆家</a>
     <nav class="nav-links">
       <a href="#categories">分類</a>
       <a href="#story">關於我們</a>
@@ -223,7 +223,7 @@
     </p>
 
     <!-- 輕鬆上桌 -->
-    <h3 class="cat-title" id="cat-1">輕鬆上桌</h3>
+    <h3 class="cat-title" id="cat-1">輕鬆上桌<a class="cat-back" href="#categories">↑ 回分類</a></h3>
     <figure class="cat-photo">
       <img src="images/dish-chicken.jpg" alt="老闆家滑蛋雞肉料理實拍" loading="lazy" width="800" height="800">
       <figcaption>加熱即上桌，配飯剛剛好</figcaption>
@@ -293,7 +293,7 @@
     </div>
 
     <!-- 絕配美味 -->
-    <h3 class="cat-title" id="cat-2">絕配美味</h3>
+    <h3 class="cat-title" id="cat-2">絕配美味<a class="cat-back" href="#categories">↑ 回分類</a></h3>
     <div class="menu-list">
       <div class="menu-item">
         <span class="item-name">泰式打拋豬肉</span>
@@ -352,7 +352,7 @@
     </div>
 
     <!-- 純淨蔬食 -->
-    <h3 class="cat-title" id="cat-3">純淨蔬食</h3>
+    <h3 class="cat-title" id="cat-3">純淨蔬食<a class="cat-back" href="#categories">↑ 回分類</a></h3>
     <div class="menu-list">
       <div class="menu-item">
         <span class="item-name">素麻婆醬</span>
@@ -395,7 +395,7 @@
     </div>
 
     <!-- 暖心燉煮 -->
-    <h3 class="cat-title" id="cat-4">暖心燉煮</h3>
+    <h3 class="cat-title" id="cat-4">暖心燉煮<a class="cat-back" href="#categories">↑ 回分類</a></h3>
     <figure class="cat-photo">
       <img src="images/dish-stew.jpg" alt="老闆家燉煮湯品實拍，大塊肉與根莖蔬菜" loading="lazy" width="800" height="800">
       <figcaption>整鍋燉到入味，退冰加熱就有一鍋湯</figcaption>
@@ -468,7 +468,7 @@
     </div>
 
     <!-- 私房料理 -->
-    <h3 class="cat-title" id="cat-5">私房料理</h3>
+    <h3 class="cat-title" id="cat-5">私房料理<a class="cat-back" href="#categories">↑ 回分類</a></h3>
     <div class="menu-list">
       <div class="menu-item">
         <span class="item-name">客家純麻油雞</span>
@@ -519,7 +519,7 @@
     </div>
 
     <!-- 料理幫手 -->
-    <h3 class="cat-title" id="cat-6">料理幫手</h3>
+    <h3 class="cat-title" id="cat-6">料理幫手<a class="cat-back" href="#categories">↑ 回分類</a></h3>
     <div class="menu-list">
       <div class="menu-item">
         <span class="item-name">鹽麴腿排</span>
@@ -657,6 +657,8 @@
   </div>
 </footer>
 
+<a href="#top" class="fab-top" id="fab-top" aria-label="回到頁面最上方" title="回到最上面">↑</a>
+
 <a href="https://lin.ee/PQPzlSx" target="_blank" rel="noopener" class="fab-line" aria-label="加LINE諮詢">LINE</a>
 
 <a href="#order" id="mini-cart" class="mini-cart" hidden>
@@ -666,5 +668,6 @@
 </a>
 
 <script src="js/cart.js"></script>
+<script src="js/ui.js"></script>
 </body>
 </html>
