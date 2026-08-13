@@ -271,39 +271,43 @@ section { padding: 64px 0; }
   background: var(--gold);
 }
 
-/* ── 品牌故事（2026-08-12 新增）──────────────────────────── */
+/* ── 品牌故事 ────────────────────────────────────────────
+   沒有製作過程照，所以不放照片，改成置中宣言＋廚師帽標誌當定錨。 */
 .story { background: var(--bg); }
-.story-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: center;
+.story-inner {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
 }
-.story-media {
-  border-radius: var(--radius);
-  overflow: hidden;
-  aspect-ratio: 4 / 3;
+.story-mark {
+  width: 78px;
+  height: auto;
+  margin: 0 auto 20px;
+  opacity: 0.95;
 }
-.story-media img { width: 100%; height: 100%; object-fit: cover; }
-.story-text h2 {
+.story-inner h2 {
   color: var(--gold);
   font-size: 1.7rem;
-  line-height: 1.5;
-  margin-bottom: 18px;
+  line-height: 1.6;
+  margin-bottom: 26px;
 }
-.story-text p {
+/* 標題下方的金色短線，讓純文字區塊有個收束 */
+.story-inner h2::after {
+  content: "";
+  display: block;
+  width: 54px;
+  height: 2px;
+  background: var(--gold);
+  margin: 22px auto 0;
+  opacity: 0.7;
+}
+.story-inner p {
   color: var(--text-mute);
-  margin-bottom: 14px;
-  font-size: 0.98rem;
+  margin-bottom: 16px;
+  font-size: 1rem;
+  line-height: 1.95;
 }
-.story-todo {
-  border-left: 3px solid var(--gold);
-  padding: 10px 14px;
-  background: var(--surface);
-  border-radius: 0 8px 8px 0;
-  font-size: 0.88rem;
-  color: var(--text-mute);
-}
+.story-inner p:last-child { margin-bottom: 0; }
 
 /* Products / Menu */
 .products { background: var(--bg); }
@@ -834,9 +838,6 @@ section { padding: 64px 0; }
   z-index: 60;
 }
 
-@media (max-width: 860px) {
-  .story-grid { grid-template-columns: 1fr; gap: 28px; }
-}
 
 @media (max-width: 600px) {
   .hero-overlay h1 { font-size: 2.1rem; }
@@ -880,5 +881,6 @@ section { padding: 64px 0; }
   .item-variant { flex: 1; }
   .mini-cart { bottom: 16px; font-size: 0.85rem; padding: 10px 18px; }
   .fab-line { bottom: 80px; }
-  .story-text h2 { font-size: 1.35rem; }
+  .story-inner h2 { font-size: 1.3rem; }
+  .story-mark { width: 62px; }
 }
