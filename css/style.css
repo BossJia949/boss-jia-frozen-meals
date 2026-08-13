@@ -301,13 +301,57 @@ section { padding: 64px 0; }
   margin: 22px auto 0;
   opacity: 0.7;
 }
-.story-inner p {
-  color: var(--text-mute);
-  margin-bottom: 16px;
-  font-size: 1rem;
-  line-height: 1.95;
+/* 品牌命名的那句話，字級拉大當副標 */
+.story-lead {
+  color: var(--text);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 34px;
 }
-.story-inner p:last-child { margin-bottom: 0; }
+/* 內文改靠左：長段落置中很難讀 */
+.story-body {
+  text-align: left;
+  max-width: 620px;
+  margin: 0 auto;
+}
+.story-body p {
+  color: var(--text-mute);
+  margin-bottom: 20px;
+  font-size: 1rem;
+  line-height: 2;
+}
+.story-close {
+  text-align: center;
+  color: var(--text) !important;
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+  margin-top: 30px;
+  margin-bottom: 0 !important;
+}
+
+/* 四段歷程。沒有照片時給這一區一個視覺骨架 */
+.story-timeline {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin: 44px 0 0;
+  padding-top: 30px;
+  border-top: 1px solid var(--border);
+}
+.story-timeline li {
+  text-align: center;
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+.story-timeline b {
+  display: block;
+  color: var(--gold);
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+.story-timeline span { color: var(--text-mute); }
 
 /* Products / Menu */
 .products { background: var(--bg); }
@@ -883,4 +927,7 @@ section { padding: 64px 0; }
   .fab-line { bottom: 80px; }
   .story-inner h2 { font-size: 1.3rem; }
   .story-mark { width: 62px; }
+  .story-lead { font-size: 1.02rem; margin-bottom: 26px; }
+  .story-body p { font-size: 0.95rem; line-height: 1.95; }
+  .story-timeline { grid-template-columns: repeat(2, 1fr); gap: 20px 12px; }
 }
