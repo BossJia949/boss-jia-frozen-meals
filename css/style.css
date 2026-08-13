@@ -666,12 +666,19 @@ section { padding: 64px 0; }
   margin-top: 8px;
   line-height: 1.6;
 }
-/* 統編／食品登錄字號／地址等法定揭露資訊，老闆家提供前一律留白不編造 */
+/* 尚未取得的資訊用這個樣式標示，一律留白不編造 */
 .footer-todo {
   color: var(--text-mute);
   font-size: 0.78rem;
   opacity: 0.7;
   font-style: italic;
+}
+/* 法定揭露資訊：商號、統編、食品業者登錄字號 */
+.footer-legal {
+  color: var(--text-mute);
+  font-size: 0.8rem;
+  line-height: 1.9;
+  margin-bottom: 10px;
 }
 .footer-bottom {
   border-top: 1px solid var(--border);
