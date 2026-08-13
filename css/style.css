@@ -470,6 +470,134 @@ section { padding: 64px 0; }
 }
 .cart-total { font-weight: 700; margin-bottom: 20px; font-size: 1.1rem; }
 
+/* ── 常見問題 自助問答 ─────────────────────────────────── */
+.faq { background: var(--surface); }
+.faq-form {
+  display: flex;
+  gap: 10px;
+  max-width: 560px;
+  margin: 0 auto 16px;
+}
+.faq-input {
+  flex: 1;
+  min-width: 0;
+  background: var(--ink);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+.faq-input::placeholder { color: var(--text-mute); opacity: 0.75; }
+.faq-input:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+.faq-submit { flex-shrink: 0; padding: 12px 22px; }
+
+.faq-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 640px;
+  margin: 0 auto 28px;
+}
+.faq-chip,
+.faq-suggest {
+  background: transparent;
+  color: var(--text-mute);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.faq-chip:hover, .faq-chip:focus-visible,
+.faq-suggest:hover, .faq-suggest:focus-visible {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+.faq-answer {
+  max-width: 640px;
+  margin: 0 auto 32px;
+  background: var(--ink);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 24px 26px;
+}
+.faq-answer[hidden] { display: none; }
+.faq-answer-q { color: var(--gold); font-size: 1.1rem; margin-bottom: 12px; }
+.faq-answer-body p { margin-bottom: 10px; font-size: 0.95rem; }
+.faq-answer-body ul,
+.faq-answer-body ol { margin: 0 0 10px 1.3em; font-size: 0.95rem; }
+.faq-answer-body li { margin-bottom: 6px; }
+.faq-answer-more {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 0.88rem;
+  color: var(--text-mute);
+}
+.faq-answer-link { color: var(--gold); font-weight: 700; margin-left: 4px; }
+
+/* 答不出來時：把客人打的原句一鍵帶進 LINE，不用重打 */
+.faq-miss { font-size: 1rem; margin-bottom: 16px; }
+.faq-ask-line { display: inline-block; }
+.faq-suggest-title {
+  margin: 20px 0 10px;
+  font-size: 0.85rem;
+  color: var(--text-mute);
+}
+.faq-suggest-row { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* 全部攤開的問答清單：沒有 JavaScript 也讀得到，搜尋引擎也爬得到 */
+.faq-list { max-width: 720px; margin: 0 auto; }
+.faq-list-title {
+  font-size: 0.95rem;
+  color: var(--text-mute);
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 14px;
+}
+.faq-item {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.faq-item summary {
+  padding: 14px 20px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.96rem;
+  color: var(--text);
+  list-style: none;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: "＋";
+  float: right;
+  color: var(--gold);
+  font-weight: 700;
+}
+.faq-item[open] summary::after { content: "－"; }
+.faq-item summary:hover { color: var(--gold); }
+.faq-a {
+  padding: 0 20px 18px;
+  font-size: 0.92rem;
+  color: var(--text-mute);
+}
+.faq-a p { margin-bottom: 9px; }
+.faq-a ul, .faq-a ol { margin: 0 0 9px 1.3em; }
+.faq-a li { margin-bottom: 6px; }
+.faq-a b { color: var(--text); }
+
 /* Booking（整站唯一的亮色區塊，讓最後的 CTA 跳出來） */
 .booking { background: var(--gold-light); text-align: center; }
 .booking .section-title { color: var(--green-dark); }

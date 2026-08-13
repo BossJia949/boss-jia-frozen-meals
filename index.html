@@ -48,6 +48,38 @@
   }
 }
 </script>
+
+<!-- FAQPage：⚠️ 內容要跟頁面下方 <details class="faq-item"> 保持一致，改一邊要改兩邊。
+     注意 Google 自 2023 年起只對政府與醫療網站顯示 FAQ 搜尋結果，這段對小店家
+     不會變成搜尋結果上的問答框；留著是為了讓搜尋引擎與 AI 檢索器讀懂頁面內容。 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "會辣嗎？小朋友可以吃嗎？",
+      "acceptedAnswer": { "@type": "Answer", "text": "大部分品項都不辣。確定會辣的是三道：泰式打拋豬肉（可選不辣／微辣／小辣，訂購時在 LINE 告知）、剝皮辣椒雞湯（無法做不辣）、麻婆肉醬（無法做不辣）。其他品項如對辣度或食材有疑慮，訂購前請直接詢問。" } },
+    { "@type": "Question", "name": "冷凍可以放多久？",
+      "acceptedAnswer": { "@type": "Answer", "text": "-18°C 冷凍保存，保存期限很長，但為了最好的口感，建議 5 週內食用完畢。" } },
+    { "@type": "Question", "name": "一包是幾人份？",
+      "acceptedAnswer": { "@type": "Answer", "text": "每道菜份量不同。客家控肉小包約 1～2 人份、大包約 2～3 人份；麻婆肉醬 1 包可煮出 2～3 人份；素麻婆醬 1 包約 1～2 人份。" } },
+    { "@type": "Question", "name": "怎麼加熱？",
+      "acceptedAnswer": { "@type": "Answer", "text": "大部分品項退冰後倒進碗裡以電鍋加熱即可。麻婆肉醬退冰加熱後，倒入切好的嫩豆腐輕輕翻煮幾分鐘即可上桌。" } },
+    { "@type": "Question", "name": "運費怎麼算？滿多少免運？",
+      "acceptedAnswer": { "@type": "Answer", "text": "超商冷凍取貨（全家／7-ELEVEN）滿 $1300 免運；黑貓冷凍宅配滿 $3300 免運。未滿額的運費金額請直接詢問。" } },
+    { "@type": "Question", "name": "有哪些配送方式？",
+      "acceptedAnswer": { "@type": "Answer", "text": "全家便利商店冷凍取貨、7-ELEVEN 冷凍取貨、黑貓宅急便冷凍宅配，三者擇一，於購物車選擇。" } },
+    { "@type": "Question", "name": "怎麼訂購？",
+      "acceptedAnswer": { "@type": "Answer", "text": "在菜單挑選品項與規格加入購物車，確認內容與配送方式後按「加LINE送出訂單」，訂單會自動帶入 LINE，再與老闆家確認取貨與付款。" } },
+    { "@type": "Question", "name": "怎麼付款？可以刷卡嗎？",
+      "acceptedAnswer": { "@type": "Answer", "text": "網站不提供線上刷卡。訂單送到 LINE 之後，付款方式與老闆家直接確認。" } },
+    { "@type": "Question", "name": "下單後多久會拿到？",
+      "acceptedAnswer": { "@type": "Answer", "text": "接到訂單才開始製作，不預先囤貨，並非現貨即時出貨。實際製作與出貨時間請於訂購時確認。" } },
+    { "@type": "Question", "name": "有素食可以吃的嗎？",
+      "acceptedAnswer": { "@type": "Answer", "text": "「純淨蔬食」分類有素麻婆醬、咖哩醬（含洋蔥）、法式蘑菇濃湯、香甜南瓜濃湯、豆包五目拌飯。其中法式蘑菇濃湯與香甜南瓜濃湯標示為五辛素。全素或其他戒律需求請於訂購前確認。" } }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -62,6 +94,7 @@
       <a href="#story">關於我們</a>
       <a href="#products">商品</a>
       <a href="#order">訂購</a>
+      <a href="#faq">常見問題</a>
     </nav>
     <a class="btn btn-line btn-sm" href="https://lin.ee/PQPzlSx" target="_blank" rel="noopener">加LINE</a>
   </div>
@@ -597,6 +630,146 @@
   </div>
 </section>
 
+<!-- 常見問題：自助問答
+     ⚠️ 問答內容只寫在下面的 <details> 裡，js/faq.js 是從畫面上讀取的，不另外維護資料檔。
+        要增刪問答就改這裡：<summary> 是問題、.faq-a 是答案、data-keywords 是客人可能的講法。
+     ⚠️ 改完記得同步更新 <head> 裡的 FAQPage 結構化標記。 -->
+<section class="faq" id="faq">
+  <div class="container">
+    <h2 class="section-title">常見問題</h2>
+    <p class="section-subtitle">打字問問看。答不出來的，會直接幫你把問題轉給老闆家</p>
+
+    <form class="faq-form" id="faq-form" role="search">
+      <input type="text" id="faq-input" class="faq-input" autocomplete="off"
+             placeholder="例如：會辣嗎、幾人份、可以放多久" aria-label="輸入你想問的問題">
+      <button type="submit" class="btn btn-primary faq-submit">問問看</button>
+    </form>
+
+    <div class="faq-chips" id="faq-chips" aria-label="常見問題快捷"></div>
+
+    <div class="faq-answer" id="faq-answer" aria-live="polite" hidden></div>
+
+    <div class="faq-list">
+      <h3 class="faq-list-title">所有問題</h3>
+
+      <details class="faq-item" id="faq-spicy"
+        data-keywords="會辣,辣不辣,辣度,能吃辣,不辣,微辣,小孩吃,小朋友吃,小孩子能吃,辣嗎,吃辣,怕辣">
+        <summary>會辣嗎？小朋友可以吃嗎？</summary>
+        <div class="faq-a">
+          <p>大部分品項都不辣。<b>確定會辣的是這三道：</b></p>
+          <ul>
+            <li><b>泰式打拋豬肉</b> — 可以選<b>不辣／微辣／小辣</b>，訂購時在 LINE 跟老闆家說一聲就好</li>
+            <li><b>剝皮辣椒雞湯</b> — 無法做不辣</li>
+            <li><b>麻婆肉醬</b> — 無法做不辣</li>
+          </ul>
+          <p>其他品項如果對辣度或食材有任何疑慮，訂購前直接問老闆家最準。</p>
+        </div>
+      </details>
+
+      <details class="faq-item" id="faq-shelf"
+        data-keywords="保存,放多久,期限,效期,保存期限,可以放,冷凍多久,幾個月,能放多久,存放,過期,保鮮">
+        <summary>冷凍可以放多久？</summary>
+        <div class="faq-a">
+          <p>-18°C 冷凍保存，保存期限其實很長。</p>
+          <p>但為了吃到<b>最好的口感</b>，我們建議 <b>5 週內食用完畢</b>。</p>
+        </div>
+      </details>
+
+      <details class="faq-item" id="faq-portion"
+        data-keywords="幾人份,份量,多少量,一包多少,夠幾個人,大小包,人份,吃幾餐,幾個人吃,份數,大包小包差別">
+        <summary>一包是幾人份？</summary>
+        <div class="faq-a">
+          <p>每道菜的份量不太一樣，幾個實際例子：</p>
+          <ul>
+            <li><b>客家控肉</b>：小包約 1～2 人份、大包約 2～3 人份</li>
+            <li><b>麻婆肉醬</b>：1 包可以煮出 2～3 人份</li>
+            <li><b>素麻婆醬</b>：1 包約 1～2 人份</li>
+          </ul>
+          <p>想確認特定品項的份量，問一下就好。</p>
+        </div>
+      </details>
+
+      <details class="faq-item" id="faq-reheat"
+        data-keywords="加熱,怎麼煮,退冰,微波,電鍋,隔水加熱,怎麼吃,料理方式,解凍,怎麼加熱,加熱方式">
+        <summary>怎麼加熱？</summary>
+        <div class="faq-a">
+          <p>基本上就是退冰之後加熱：</p>
+          <ul>
+            <li><b>大部分品項</b>：退冰 → 倒進碗裡 → 電鍋加熱 → 完成</li>
+            <li><b>麻婆肉醬</b>：退冰加熱後，倒入切好的嫩豆腐，輕輕翻煮幾分鐘就能上桌</li>
+          </ul>
+          <p>不確定某一道怎麼弄，問老闆家。</p>
+        </div>
+      </details>
+
+      <details class="faq-item" id="faq-shipping"
+        data-keywords="運費,免運,運費多少,寄送費,宅配費,滿多少免運,免運門檻,要運費嗎">
+        <summary>運費怎麼算？滿多少免運？</summary>
+        <div class="faq-a">
+          <ul>
+            <li>超商冷凍取貨（全家／7-ELEVEN）：滿 <b>$1300</b> 免運</li>
+            <li>黑貓冷凍宅配：滿 <b>$3300</b> 免運</li>
+          </ul>
+          <p>沒有滿額的運費金額，請直接問老闆家。</p>
+        </div>
+      </details>
+
+      <details class="faq-item" id="faq-delivery"
+        data-keywords="配送,怎麼寄,超商,全家,711,7-11,統一超商,黑貓,宅配,取貨,店到店,怎麼拿到,寄到哪">
+        <summary>有哪些配送方式？</summary>
+        <div class="faq-a">
+          <p>三種可以選，在購物車直接勾：</p>
+          <ul>
+            <li>全家便利商店 冷凍取貨</li>
+            <li>7-ELEVEN 冷凍取貨</li>
+            <li>黑貓宅急便 冷凍宅配</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="faq-item" id="faq-order"
+        data-keywords="怎麼訂,訂購,怎麼買,下單,購買,怎麼下單,訂購方式,要去哪買,如何訂購">
+        <summary>怎麼訂購？</summary>
+        <div class="faq-a">
+          <ol>
+            <li>在上面的菜單挑好品項與規格，按「加入」</li>
+            <li>確認購物車內容，選配送方式</li>
+            <li>按「加LINE送出訂單」，訂單會自動帶進 LINE</li>
+            <li>跟老闆家確認取貨方式與付款</li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="faq-item" id="faq-payment"
+        data-keywords="付款,怎麼付,匯款,刷卡,付錢,貨到付款,轉帳,付款方式,可以刷卡嗎">
+        <summary>怎麼付款？可以刷卡嗎？</summary>
+        <div class="faq-a">
+          <p>網站上<b>不做線上刷卡</b>，訂單送到 LINE 之後，付款方式跟老闆家直接確認。</p>
+        </div>
+      </details>
+
+      <details class="faq-item" id="faq-lead"
+        data-keywords="多久出貨,幾天到,現貨,要等多久,出貨,什麼時候到,製作時間,多久可以拿到,要等幾天,多久會到,多久收到,什麼時候會到,多久能拿到">
+        <summary>下單後多久會拿到？</summary>
+        <div class="faq-a">
+          <p>老闆家是<b>接到訂單才開始製作</b>的，不預先囤貨，所以不是現貨立刻出。</p>
+          <p>實際的製作與出貨時間，訂購時跟老闆家確認。</p>
+        </div>
+      </details>
+
+      <details class="faq-item" id="faq-vegetarian"
+        data-keywords="素食,吃素,素,五辛素,蔬食,全素,素的,有素食嗎,素食可以吃">
+        <summary>有素食可以吃的嗎？</summary>
+        <div class="faq-a">
+          <p>「純淨蔬食」分類裡有：素麻婆醬、咖哩醬（含洋蔥）、法式蘑菇濃湯、香甜南瓜濃湯、豆包五目拌飯。</p>
+          <p>其中<b>法式蘑菇濃湯與香甜南瓜濃湯標示為五辛素</b>。如果你吃的是全素或有其他戒律，訂購前先問老闆家確認。</p>
+        </div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
 <!-- 5. 預約系統 / LINE諮詢 -->
 <section class="booking" id="booking">
   <div class="container">
@@ -671,6 +844,7 @@
 </a>
 
 <script src="js/cart.js"></script>
+<script src="js/faq.js"></script>
 <script src="js/ui.js"></script>
 </body>
 </html>
