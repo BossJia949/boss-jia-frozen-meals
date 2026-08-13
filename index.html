@@ -58,7 +58,7 @@
   "@type": "FAQPage",
   "mainEntity": [
     { "@type": "Question", "name": "會辣嗎？小朋友可以吃嗎？",
-      "acceptedAnswer": { "@type": "Answer", "text": "大部分品項都不辣。確定會辣的是三道：泰式打拋豬肉（可選不辣／微辣／小辣，訂購時在 LINE 告知）、剝皮辣椒雞湯（無法做不辣）、麻婆肉醬（無法做不辣）。其他品項如對辣度或食材有疑慮，訂購前請直接詢問。" } },
+      "acceptedAnswer": { "@type": "Answer", "text": "大部分品項都不辣。會辣的是 5 道：泰式打拋豬肉（可於購物車選不辣／微辣／小辣）、剝皮辣椒雞湯（無法做不辣）、麻婆肉醬（無法做不辣）、素麻婆醬、雙椒皮蛋肉燥。其他品項不辣；若家中有幼童或對辣特別敏感，訂購前請先確認。" } },
     { "@type": "Question", "name": "冷凍可以放多久？",
       "acceptedAnswer": { "@type": "Answer", "text": "-18°C 冷凍保存，保存期限很長，但為了最好的口感，建議 5 週內食用完畢。" } },
     { "@type": "Question", "name": "一包是幾人份？",
@@ -66,7 +66,7 @@
     { "@type": "Question", "name": "怎麼加熱？",
       "acceptedAnswer": { "@type": "Answer", "text": "大部分品項退冰後倒進碗裡以電鍋加熱即可。麻婆肉醬退冰加熱後，倒入切好的嫩豆腐輕輕翻煮幾分鐘即可上桌。" } },
     { "@type": "Question", "name": "運費怎麼算？滿多少免運？",
-      "acceptedAnswer": { "@type": "Answer", "text": "超商冷凍取貨（全家／7-ELEVEN）滿 $1300 免運；黑貓冷凍宅配滿 $3300 免運。未滿額的運費金額請直接詢問。" } },
+      "acceptedAnswer": { "@type": "Answer", "text": "超商冷凍取貨（全家／7-ELEVEN）滿 $1300 免運，未滿運費 $129；黑貓冷凍宅配滿 $3300 免運，未滿運費 $250。" } },
     { "@type": "Question", "name": "有哪些配送方式？",
       "acceptedAnswer": { "@type": "Answer", "text": "全家便利商店冷凍取貨、7-ELEVEN 冷凍取貨、黑貓宅急便冷凍宅配，三者擇一，於購物車選擇。" } },
     { "@type": "Question", "name": "怎麼訂購？",
@@ -159,7 +159,11 @@
 
       <a class="cat-nav-item" href="#cat-4">
         <div class="cat-nav-media">
-          <img src="images/dish-stew.jpg" alt="暖心燉煮分類代表料理" loading="lazy" width="800" height="600">
+          <div class="photo-placeholder">
+            <span class="ph-emoji" aria-hidden="true">🍲</span>
+            <span class="ph-name">暖心燉煮</span>
+            <span class="ph-size">照片待補 800×600</span>
+          </div>
         </div>
         <div class="cat-nav-body">
           <span class="cat-nav-name">暖心燉煮</span>
@@ -169,11 +173,7 @@
 
       <a class="cat-nav-item" href="#cat-5">
         <div class="cat-nav-media">
-          <div class="photo-placeholder">
-            <span class="ph-emoji" aria-hidden="true">🍖</span>
-            <span class="ph-name">私房料理</span>
-            <span class="ph-size">照片待補 800×600</span>
-          </div>
+          <img src="images/dish-braised-pork.jpg" alt="私房料理分類代表：紅燒燉黑豬肉" loading="lazy" width="800" height="600">
         </div>
         <div class="cat-nav-body">
           <span class="cat-nav-name">私房料理</span>
@@ -202,7 +202,9 @@
 <section class="features" id="features">
   <div class="container">
     <h2 class="section-title">商品特色</h2>
-    <div class="feature-grid">
+    <!-- 桌機三欄並排；手機（≤600px）變成可滑的輪播，只佔一格高度。
+         用 CSS scroll-snap 實作，沒有 JavaScript 也能用手指滑，圓點只是輔助。 -->
+    <div class="feature-grid" id="feature-grid">
       <div class="feature-card">
         <div class="feature-icon" aria-hidden="true">🥗</div>
         <h3>營養師標準把關</h3>
@@ -219,6 +221,7 @@
         <p>接單後才開始製作，新鮮美味就像現做。</p>
       </div>
     </div>
+    <div class="feature-dots" id="feature-dots" aria-label="商品特色輪播導覽"></div>
   </div>
 </section>
 
@@ -250,8 +253,8 @@
     <p class="section-subtitle">下單才製作的新鮮美味　<span class="menu-version">202606版</span></p>
 
     <div class="shipping-note">
-      <span>滿 <b>$1300</b> 享超商冷凍取貨免運</span>
-      <span>滿 <b>$3300</b> 享黑貓冷凍宅配免運</span>
+      <span>滿 <b>$1300</b> 享超商冷凍取貨免運（未滿 $129）</span>
+      <span>滿 <b>$3300</b> 享黑貓冷凍宅配免運（未滿 $250）</span>
     </div>
 
     <p class="menu-download">
@@ -337,6 +340,13 @@
           <option value="小3包|525">小3包 $525</option>
           <option value="5包|820">5包 $820</option>
           <option value="大|500">大 $500</option>
+        </select>
+        <!-- 唯一可選辣度的品項。cart.js 看到 .item-option 就會把它併進規格名稱，
+             訂單會變成「泰式打拋豬肉（大・微辣）」。其他商品沒有這個下拉，行為不變。 -->
+        <select class="item-option" aria-label="泰式打拋豬肉 辣度">
+          <option value="微辣" selected>微辣</option>
+          <option value="不辣">不辣</option>
+          <option value="小辣">小辣</option>
         </select>
         <button class="btn btn-add" data-name="泰式打拋豬肉">加入</button>
       </div>
@@ -433,7 +443,11 @@
     <!-- 暖心燉煮 -->
     <h3 class="cat-title" id="cat-4">暖心燉煮<a class="cat-back" href="#categories">↑ 回分類</a></h3>
     <figure class="cat-photo">
-      <img src="images/dish-stew.jpg" alt="老闆家燉煮湯品實拍，大塊肉與根莖蔬菜" loading="lazy" width="800" height="800">
+      <div class="photo-placeholder">
+        <span class="ph-emoji" aria-hidden="true">🍲</span>
+        <span class="ph-name">暖心燉煮</span>
+        <span class="ph-size">照片待補</span>
+      </div>
       <figcaption>整鍋燉到入味，退冰加熱就有一鍋湯</figcaption>
     </figure>
     <div class="menu-list">
@@ -505,6 +519,10 @@
 
     <!-- 私房料理 -->
     <h3 class="cat-title" id="cat-5">私房料理<a class="cat-back" href="#categories">↑ 回分類</a></h3>
+    <figure class="cat-photo">
+      <img src="images/dish-braised-pork.jpg" alt="老闆家紅燒燉黑豬肉實拍" loading="lazy" width="800" height="800">
+      <figcaption>紅燒燉到入味，退冰加熱就上桌</figcaption>
+    </figure>
     <div class="menu-list">
       <div class="menu-item">
         <span class="item-name">客家純麻油雞</span>
@@ -611,15 +629,15 @@
       <fieldset class="shipping-picker">
         <legend>配送方式</legend>
         <label>
-          <input type="radio" name="shipping" value="全家便利商店 冷凍取貨" data-threshold="1300" checked>
+          <input type="radio" name="shipping" value="全家便利商店 冷凍取貨" data-threshold="1300" data-fee="129" checked>
           <span>全家便利商店</span>
         </label>
         <label>
-          <input type="radio" name="shipping" value="7-ELEVEN 冷凍取貨" data-threshold="1300">
+          <input type="radio" name="shipping" value="7-ELEVEN 冷凍取貨" data-threshold="1300" data-fee="129">
           <span>7-ELEVEN</span>
         </label>
         <label>
-          <input type="radio" name="shipping" value="黑貓宅急便 冷凍宅配" data-threshold="3300">
+          <input type="radio" name="shipping" value="黑貓宅急便 冷凍宅配" data-threshold="3300" data-fee="250">
           <span>黑貓宅急便</span>
         </label>
       </fieldset>
@@ -656,13 +674,15 @@
         data-keywords="會辣,辣不辣,辣度,能吃辣,不辣,微辣,小孩吃,小朋友吃,小孩子能吃,辣嗎,吃辣,怕辣">
         <summary>會辣嗎？小朋友可以吃嗎？</summary>
         <div class="faq-a">
-          <p>大部分品項都不辣。<b>確定會辣的是這三道：</b></p>
+          <p>大部分品項都不辣。<b>會辣的是這 5 道：</b></p>
           <ul>
             <li><b>泰式打拋豬肉</b> — 可以選<b>不辣／微辣／小辣</b>，訂購時在 LINE 跟老闆家說一聲就好</li>
             <li><b>剝皮辣椒雞湯</b> — 無法做不辣</li>
             <li><b>麻婆肉醬</b> — 無法做不辣</li>
+            <li><b>素麻婆醬</b> — 會辣，吃素的朋友請留意</li>
+            <li><b>雙椒皮蛋肉燥</b> — 會辣</li>
           </ul>
-          <p>其他品項如果對辣度或食材有任何疑慮，訂購前直接問老闆家最準。</p>
+          <p>其他品項不辣。如果家裡有小小孩或對辣特別敏感，訂購前跟老闆家確認一下最保險。</p>
         </div>
       </details>
 
@@ -707,10 +727,10 @@
         <summary>運費怎麼算？滿多少免運？</summary>
         <div class="faq-a">
           <ul>
-            <li>超商冷凍取貨（全家／7-ELEVEN）：滿 <b>$1300</b> 免運</li>
-            <li>黑貓冷凍宅配：滿 <b>$3300</b> 免運</li>
+            <li>超商冷凍取貨（全家／7-ELEVEN）：滿 <b>$1300</b> 免運，未滿運費 <b>$129</b></li>
+            <li>黑貓冷凍宅配：滿 <b>$3300</b> 免運，未滿運費 <b>$250</b></li>
           </ul>
-          <p>沒有滿額的運費金額，請直接問老闆家。</p>
+          <p>購物車會自動幫你算「再差多少就免運」，也會顯示未滿的運費。</p>
         </div>
       </details>
 

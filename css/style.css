@@ -238,6 +238,29 @@ section { padding: 64px 0; }
 .feature-card h3 { color: var(--gold); margin-bottom: 10px; }
 .feature-card p { color: var(--text-mute); font-size: 0.95rem; }
 
+/* 輪播圓點：桌機三欄並排時用不到，只在手機顯示（見 600px 的 media query） */
+.feature-dots {
+  display: none;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 18px;
+}
+.feature-dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(248, 248, 232, 0.28);
+  cursor: pointer;
+  transition: width 0.2s ease, background 0.2s ease;
+}
+.feature-dot.is-active {
+  width: 24px;
+  border-radius: 999px;
+  background: var(--gold);
+}
+
 /* ── 品牌故事（2026-08-12 新增）──────────────────────────── */
 .story { background: var(--bg); }
 .story-grid {
@@ -401,7 +424,8 @@ section { padding: 64px 0; }
   vertical-align: middle;
   margin-left: 4px;
 }
-.item-variant {
+.item-variant,
+.item-option {
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 7px 8px;
@@ -410,6 +434,11 @@ section { padding: 64px 0; }
   background: var(--ink);
   font-family: inherit;
   cursor: pointer;
+}
+/* 選配的第二個下拉（辣度）。用金色框跟規格下拉區隔，客人才不會漏看 */
+.item-option {
+  border-color: var(--gold);
+  color: var(--gold);
 }
 
 /* Order（比頁面底色亮一階，做出抬升的面板感） */
@@ -798,6 +827,29 @@ section { padding: 64px 0; }
   .section-title { font-size: 1.5rem; }
   .nav-links { display: none; }
   .menu-list { grid-template-columns: 1fr; }
+
+  /* 商品特色改成一次一張的輪播，省掉手機上三張直排的長度。
+     用原生的橫向捲動 + scroll-snap：手指滑就會一張一張定位，不需要 JavaScript。 */
+  .feature-grid {
+    display: flex;
+    grid-template-columns: none;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* 負邊距抵銷 .container 的內距，讓卡片能滑到貼齊螢幕邊緣 */
+    margin: 0 -20px;
+    padding: 0 20px;
+  }
+  .feature-grid::-webkit-scrollbar { display: none; }
+  .feature-card {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+    padding: 26px 20px;
+  }
+  .feature-dots { display: flex; }
   .cat-nav-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   .cat-nav-body { padding: 10px 12px 14px; }
   .cat-nav-name { font-size: 0.92rem; }
