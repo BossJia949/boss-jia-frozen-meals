@@ -73,12 +73,16 @@
       "acceptedAnswer": { "@type": "Answer", "text": "大部分品項都不辣。會辣的是 5 道：泰式打拋豬肉（可於購物車選不辣／微辣／小辣）、剝皮辣椒雞湯（無法做不辣）、麻婆肉醬（無法做不辣）、素麻婆醬、雙椒皮蛋肉燥。其他品項不辣；若家中有幼童或對辣特別敏感，訂購前請先確認。" } },
     { "@type": "Question", "name": "冷凍可以放多久？",
       "acceptedAnswer": { "@type": "Answer", "text": "-18°C 冷凍保存，保存期限很長，但為了最好的口感，建議 5 週內食用完畢。" } },
-    { "@type": "Question", "name": "一包是幾人份？",
-      "acceptedAnswer": { "@type": "Answer", "text": "每道菜份量不同。客家控肉小包約 1～2 人份、大包約 2～3 人份；麻婆肉醬 1 包可煮出 2～3 人份；素麻婆醬 1 包約 1～2 人份。" } },
+    { "@type": "Question", "name": "一包是幾人份？大包小包差多少？",
+      "acceptedAnswer": { "@type": "Answer", "text": "每個人食量不同，抓一個大概：小包多數是 1 人份，約一支去骨雞腿排的肉量；炸醬、肉燥類的小包約 2 人份；大包是小包的 2.5～3 倍肉量（依品項不同而異）。每次退冰加熱後建議當餐吃完。" } },
     { "@type": "Question", "name": "怎麼加熱？",
-      "acceptedAnswer": { "@type": "Answer", "text": "大部分品項退冰後倒進碗裡以電鍋加熱即可。麻婆肉醬退冰加熱後，倒入切好的嫩豆腐輕輕翻煮幾分鐘即可上桌。" } },
+      "acceptedAnswer": { "@type": "Answer", "text": "湯類、肉燥類用電鍋加熱最省事；炒雞腿丁類建議用平底鍋加一點水翻炒收乾，最接近現炒口感；鹽麴腿排的包裝袋標籤上有簡單教學；麻婆肉醬退冰加熱後倒入嫩豆腐輕輕翻煮幾分鐘即可。微波也很方便。" } },
+    { "@type": "Question", "name": "辣度、加糖、加米酒…這些可以調整嗎？",
+      "acceptedAnswer": { "@type": "Answer", "text": "任何客製調整的需求都可以在訂購時討論，在能夠客製的範圍內會盡可能協助。直接在 LINE 告知即可。" } },
+    { "@type": "Question", "name": "五入組合可以混搭口味嗎？",
+      "acceptedAnswer": { "@type": "Answer", "text": "需要同口味才有組合優惠。想一次多買幾種不同口味，可以分開單包購買。" } },
     { "@type": "Question", "name": "運費怎麼算？滿多少免運？",
-      "acceptedAnswer": { "@type": "Answer", "text": "超商冷凍取貨（全家／7-ELEVEN）滿 $1300 免運，未滿運費 $129；黑貓冷凍宅配滿 $3300 免運，未滿運費 $250。" } },
+      "acceptedAnswer": { "@type": "Answer", "text": "超商冷凍取貨（全家／7-ELEVEN）滿 $1300 免運，未滿運費 $129；黑貓冷凍宅配滿 $3300 免運，未滿運費 $225。" } },
     { "@type": "Question", "name": "有哪些配送方式？",
       "acceptedAnswer": { "@type": "Answer", "text": "全家便利商店冷凍取貨、7-ELEVEN 冷凍取貨、黑貓宅急便冷凍宅配，三者擇一，於購物車選擇。" } },
     { "@type": "Question", "name": "怎麼訂購？",
@@ -91,6 +95,84 @@
       "acceptedAnswer": { "@type": "Answer", "text": "「純淨蔬食」分類有素麻婆醬、咖哩醬（含洋蔥）、法式蘑菇濃湯、香甜南瓜濃湯、豆包五目拌飯。其中法式蘑菇濃湯與香甜南瓜濃湯標示為五辛素。全素或其他戒律需求請於訂購前確認。" } }
   ]
 }
+</script>
+
+<!-- Recipe 結構化標記：⚠️ 要跟頁面 #recipes 區塊的內容保持一致。
+     與 FAQ 不同，食譜的搜尋結果版位 Google 仍然有在給，值得認真維護。 -->
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org", "@type": "Recipe",
+    "name": "樹子清蒸鱸魚",
+    "image": "https://bossjia949.github.io/boss-jia-frozen-meals/images/%E9%A3%9F%E8%AD%9C-%E6%A8%B9%E5%AD%90%E6%B8%85%E8%92%B8%E9%B1%B8%E9%AD%9A.jpg",
+    "author": { "@type": "Organization", "name": "老闆家 Boss Jia" },
+    "description": "用老闆家去刺金目鱸魚做的樹子清蒸鱸魚，電鍋蒸 13-15 分鐘即可上桌。",
+    "recipeCategory": "主菜", "recipeCuisine": "台式", "recipeYield": "1 份",
+    "cookTime": "PT15M",
+    "recipeIngredient": ["去刺金目鱸魚 1 片", "薑 2 片", "蔥白段少許", "米酒少許", "醬油 10ml", "樹子 1 湯匙", "樹子湯汁 1 湯匙", "薑絲、青蔥絲、辣椒絲適量"],
+    "recipeInstructions": [
+      { "@type": "HowToStep", "text": "魚片先退冰完全。" },
+      { "@type": "HowToStep", "text": "使用廚房紙巾將鱸魚表面的水份擦乾。" },
+      { "@type": "HowToStep", "text": "在鱸魚表面（有皮的那一面）斜劃 2 刀，蒸起來比較好看。可省略。" },
+      { "@type": "HowToStep", "text": "將鱸魚整條放在盤子上，放薑 2 片、蔥白段少許、米酒少許、醬油 10ml、樹子 1 湯匙與樹子湯汁 1 湯匙，放入電鍋蒸 13 至 15 分鐘。" },
+      { "@type": "HowToStep", "text": "蒸魚的時候準備薑絲、青蔥絲、辣椒絲，用飲用水浸泡備用。" },
+      { "@type": "HowToStep", "text": "計時到後，將薑片、蔥白段去除，把切好的蔥絲、薑絲、辣椒絲瀝乾水份，放在魚片上再蒸 1 分鐘。" },
+      { "@type": "HowToStep", "text": "將魚取出，盛盤後把湯汁淋在魚上面，會更入味。" }
+    ]
+  },
+  {
+    "@context": "https://schema.org", "@type": "Recipe",
+    "name": "泰式檸檬魚",
+    "image": "https://bossjia949.github.io/boss-jia-frozen-meals/images/%E9%A3%9F%E8%AD%9C-%E6%B3%B0%E5%BC%8F%E6%AA%B8%E6%AA%AC%E9%AD%9A.jpg",
+    "author": { "@type": "Organization", "name": "老闆家 Boss Jia" },
+    "description": "用老闆家去刺金目鱸魚做的泰式檸檬魚，酸辣開胃，電鍋就能完成。",
+    "recipeCategory": "主菜", "recipeCuisine": "泰式", "recipeYield": "1 份",
+    "cookTime": "PT15M",
+    "recipeIngredient": ["去刺金目鱸魚 1 片", "薑 2 片", "蔥白段少許", "米酒少許", "檸檬汁 30ml", "魚露 15ml", "糖漿 10ml", "蒜末、辣椒末、香菜碎適量", "檸檬片 2 片"],
+    "recipeInstructions": [
+      { "@type": "HowToStep", "text": "使用廚房紙巾將鱸魚表面的水份擦乾。" },
+      { "@type": "HowToStep", "text": "在鱸魚表面（有皮的那一面）斜劃 2 刀，蒸起來比較好看。可省略。" },
+      { "@type": "HowToStep", "text": "將鱸魚整片放在盤子上，放薑 2 片、蔥白段少許、米酒少許，放入電鍋蒸 13 至 15 分鐘。" },
+      { "@type": "HowToStep", "text": "蒸魚的時間準備醬汁與配料。" },
+      { "@type": "HowToStep", "text": "計時到後，將薑片、蔥白段與湯汁去除，將魚取出盛盤。蒸魚的湯汁務必倒掉，才不會影響醬汁的味道。" },
+      { "@type": "HowToStep", "text": "把切好的配料洗淨瀝乾，倒入調好的醬汁，淋到魚上面，放上 2 片檸檬片。" }
+    ]
+  },
+  {
+    "@context": "https://schema.org", "@type": "Recipe",
+    "name": "蔥燒金目鱸魚",
+    "image": "https://bossjia949.github.io/boss-jia-frozen-meals/images/%E9%A3%9F%E8%AD%9C-%E8%94%A5%E7%87%92%E9%87%91%E7%9B%AE%E9%B1%B8%E9%AD%9A.jpg",
+    "author": { "@type": "Organization", "name": "老闆家 Boss Jia" },
+    "description": "用老闆家去刺金目鱸魚做的蔥燒鱸魚，先煎後燒，醬汁濃稠入味。",
+    "recipeCategory": "主菜", "recipeCuisine": "台式", "recipeYield": "1 份",
+    "cookTime": "PT15M",
+    "recipeIngredient": ["去刺金目鱸魚 1 片", "薑 2 片", "蔥白段", "蔥綠段", "洋蔥絲 50 克", "辣椒 2 片", "蠔油 20ml", "醬油 10ml", "米酒 10ml", "玉米粉適量", "糖少許", "水 150ml"],
+    "recipeInstructions": [
+      { "@type": "HowToStep", "text": "用廚房紙巾將鱸魚表面的水份擦乾。" },
+      { "@type": "HowToStep", "text": "鱸魚魚肉朝下，先煎 2 分鐘上色，翻面再煎 2 分鐘後盛起備用。魚必須煎到兩面呈金黃色，醬汁才會有足夠的香氣。" },
+      { "@type": "HowToStep", "text": "爆香薑片、蔥白段、洋蔥。" },
+      { "@type": "HowToStep", "text": "洋蔥炒軟後，加入調味料。" },
+      { "@type": "HowToStep", "text": "醬汁燒滾後轉小火，把煎好的魚片放入，加蓋燜煮 2 分鐘。盡量不要攪動，可以用湯匙把醬汁淋到魚片上。" },
+      { "@type": "HowToStep", "text": "開蓋將魚先盛盤，醬汁加入蔥綠跟辣椒片，燒煮至濃稠，淋在魚片上即可。" }
+    ]
+  },
+  {
+    "@context": "https://schema.org", "@type": "Recipe",
+    "name": "香煎金目鱸魚",
+    "image": "https://bossjia949.github.io/boss-jia-frozen-meals/images/%E9%A3%9F%E8%AD%9C-%E9%A6%99%E7%85%8E%E9%87%91%E7%9B%AE%E9%B1%B8%E9%AD%9A.jpg",
+    "author": { "@type": "Organization", "name": "老闆家 Boss Jia" },
+    "description": "用老闆家去刺金目鱸魚做的香煎鱸魚，掌握油溫與火候，外皮金黃酥香。",
+    "recipeCategory": "主菜", "recipeCuisine": "台式", "recipeYield": "1 份",
+    "cookTime": "PT5M",
+    "recipeIngredient": ["去刺金目鱸魚 1 片", "食用油適量"],
+    "recipeInstructions": [
+      { "@type": "HowToStep", "text": "使用廚房紙巾將鱸魚表面的水份擦乾。" },
+      { "@type": "HowToStep", "text": "加熱鍋子，手掌在鍋子 10 公分處感受到熱度時，倒入足夠的油，搖晃鍋子讓油均勻並稍微流動。" },
+      { "@type": "HowToStep", "text": "油溫加熱到開始冒白煙，魚肉朝下放入，小火煎 2 分鐘至金黃色。2 分鐘沒有上色表示火太小，顏色太深則火太大。" },
+      { "@type": "HowToStep", "text": "翻面再煎 2 分鐘，魚皮煎出焦黃色後翻面，再煎 2 分鐘到魚肉那面呈現焦黃色。" }
+    ]
+  }
+]
 </script>
 </head>
 <body>
@@ -109,6 +191,7 @@
       <a href="#story">關於我們</a>
       <a href="#products">商品</a>
       <a href="#order">訂購</a>
+      <a href="#recipes">食譜</a>
       <a href="#faq">常見問題</a>
     </nav>
     <a class="btn btn-line btn-sm" href="https://lin.ee/PQPzlSx" target="_blank" rel="noopener">加LINE</a>
@@ -266,7 +349,7 @@
 
     <div class="shipping-note">
       <span>滿 <b>$1300</b> 享超商冷凍取貨免運（未滿 $129）</span>
-      <span>滿 <b>$3300</b> 享黑貓冷凍宅配免運（未滿 $250）</span>
+      <span>滿 <b>$3300</b> 享黑貓冷凍宅配免運（未滿 $225）</span>
     </div>
 
     <p class="menu-download">
@@ -657,13 +740,111 @@
           <span>7-ELEVEN</span>
         </label>
         <label>
-          <input type="radio" name="shipping" value="黑貓宅急便 冷凍宅配" data-threshold="3300" data-fee="250">
+          <input type="radio" name="shipping" value="黑貓宅急便 冷凍宅配" data-threshold="3300" data-fee="225">
           <span>黑貓宅急便</span>
         </label>
       </fieldset>
 
       <p id="shipping-hint" class="shipping-hint"></p>
       <a id="cart-line-btn" class="btn btn-line" href="https://lin.ee/PQPzlSx" target="_blank" rel="noopener">加LINE送出訂單</a>
+    </div>
+  </div>
+</section>
+
+<!-- 食譜建議
+     圖卡是老闆家做的，適合存手機／傳 LINE；但圖裡的字 Google 爬不到，
+     所以同一份內容也打成文字。食譜是 Google 少數還有給版位的類型
+     （FAQ 的版位 2023 就收掉了），所以下方另外附 Recipe 結構化標記。 -->
+<section class="recipes" id="recipes">
+  <div class="container">
+    <h2 class="section-title">食譜建議</h2>
+    <p class="section-subtitle">買了<a href="#cat-6">去刺金目鱸魚</a>，回家可以這樣煮</p>
+
+    <div class="recipe-list">
+
+      <details class="recipe-item" id="recipe-steamed">
+        <summary>樹子清蒸鱸魚</summary>
+        <div class="recipe-body">
+          <a class="recipe-card" href="images/食譜-樹子清蒸鱸魚.jpg" target="_blank" rel="noopener">
+            <img src="images/食譜-樹子清蒸鱸魚-縮圖.jpg" alt="老闆家 樹子清蒸鱸魚 食譜圖卡" width="420" height="573">
+            <span class="recipe-card-hint">點圖看大張，可長按存到手機</span>
+          </a>
+          <ol>
+            <li>魚片先退冰完全。</li>
+            <li>使用廚房紙巾將鱸魚表面的水份擦乾。</li>
+            <li>在鱸魚表面（有皮的那一面）斜劃 2 刀，蒸起來比較好看。（可省略）</li>
+            <li>將鱸魚整條放在盤子上，放薑 2 片、蔥白段少許、米酒少許、醬油 10ml、樹子 1 湯匙＆樹子湯汁 1 湯匙，放入電鍋蒸 13–15 分鐘。</li>
+            <li>蒸魚的時候準備薑絲、青蔥絲、辣椒絲，用飲用水浸泡備用。</li>
+            <li>計時到後，將薑片、蔥白段去除，把切好的蔥絲、薑絲、辣椒絲瀝乾水份，放在魚片上再蒸 1 分鐘。</li>
+            <li>計時到，將魚取出，盛盤後把湯汁淋在魚上面，會更入味。</li>
+          </ol>
+          <p class="recipe-tip"><b>進階版：</b>蔥絲、薑絲、辣椒絲也可以使用油潑的方式，香氣會更足，色澤也更佳！</p>
+        </div>
+      </details>
+
+      <details class="recipe-item" id="recipe-thai">
+        <summary>泰式檸檬魚</summary>
+        <div class="recipe-body">
+          <a class="recipe-card" href="images/食譜-泰式檸檬魚.jpg" target="_blank" rel="noopener">
+            <img src="images/食譜-泰式檸檬魚-縮圖.jpg" alt="老闆家 泰式檸檬魚 食譜圖卡" width="420" height="592">
+            <span class="recipe-card-hint">點圖看大張，可長按存到手機</span>
+          </a>
+          <p class="recipe-ing"><b>醬汁：</b>檸檬汁 30ml、魚露 15ml、糖漿 10ml<br>
+            <b>配料：</b>蒜末、辣椒末、香菜碎</p>
+          <ol>
+            <li>使用廚房紙巾將鱸魚表面的水份擦乾。</li>
+            <li>在鱸魚表面（有皮的那一面）斜劃 2 刀，蒸起來比較好看。（可省略）</li>
+            <li>將鱸魚整片放在盤子上，放薑 2 片、蔥白段少許、米酒少許，放入電鍋蒸 13–15 分鐘。</li>
+            <li>蒸魚的時間，準備醬汁與配料。</li>
+            <li>計時到後，將薑片、蔥白段與湯汁去除，將魚取出盛盤。</li>
+            <li>把切好的配料洗淨瀝乾，倒入調好的醬汁，淋到魚上面，放上 2 片檸檬片。</li>
+          </ol>
+          <p class="recipe-tip"><b>小提醒：</b><br>
+            蒸魚的湯汁務必倒掉，才不會影響醬汁的味道。<br>
+            醬汁可以依個人喜好調整份量。</p>
+        </div>
+      </details>
+
+      <details class="recipe-item" id="recipe-scallion">
+        <summary>蔥燒金目鱸魚</summary>
+        <div class="recipe-body">
+          <a class="recipe-card" href="images/食譜-蔥燒金目鱸魚.jpg" target="_blank" rel="noopener">
+            <img src="images/食譜-蔥燒金目鱸魚-縮圖.jpg" alt="老闆家 蔥燒金目鱸魚 食譜圖卡" width="420" height="592">
+            <span class="recipe-card-hint">點圖看大張，可長按存到手機</span>
+          </a>
+          <p class="recipe-ing"><b>辛香料：</b>薑 2 片、蔥白段、蔥綠段、洋蔥絲 50 克、辣椒 2 片<br>
+            <b>調味料：</b>蠔油 20ml、醬油 10ml、米酒 10ml、玉米粉適量、糖少許（可省略），加 150ml 的水拌勻</p>
+          <ol>
+            <li>用廚房紙巾將鱸魚表面的水份擦乾。</li>
+            <li>鱸魚魚肉朝下，先煎 2 分鐘上色，翻面再煎 2 分鐘後盛起備用。</li>
+            <li>爆香薑片、蔥白段、洋蔥。</li>
+            <li>洋蔥炒軟後，加入調味料。</li>
+            <li>醬汁燒滾後轉小火，把煎好的魚片放入，加蓋燜煮 2 分鐘。</li>
+            <li>開蓋將魚先盛盤，醬汁加入蔥綠跟辣椒片（可省略），燒煮至濃稠，淋在魚片上即可。</li>
+          </ol>
+          <p class="recipe-tip"><b>小提醒：</b><br>
+            魚必須煎到兩面呈金黃色，燒煮的醬汁才會有足夠的香氣。<br>
+            魚放回醬汁燒煮時盡量不要攪動，可以用湯匙把醬汁淋到魚片上，會更入味。<br>
+            燒煮的時間請依照鍋具大小與火力調整，加蓋燜煮才能入味。</p>
+        </div>
+      </details>
+
+      <details class="recipe-item" id="recipe-panfried">
+        <summary>香煎金目鱸魚</summary>
+        <div class="recipe-body">
+          <a class="recipe-card" href="images/食譜-香煎金目鱸魚.jpg" target="_blank" rel="noopener">
+            <img src="images/食譜-香煎金目鱸魚-縮圖.jpg" alt="老闆家 香煎金目鱸魚 食譜圖卡" width="420" height="592">
+            <span class="recipe-card-hint">點圖看大張，可長按存到手機</span>
+          </a>
+          <ol>
+            <li>使用廚房紙巾將鱸魚表面的水份擦乾。</li>
+            <li>加熱鍋子，手掌在鍋子 10 公分處感受到熱度時，倒入足夠的油（搖晃鍋子讓油均勻並稍微流動的程度）。</li>
+            <li>油溫加熱到開始冒白煙，魚肉朝下放入，小火煎 2 分鐘，呈現金黃色。（2 分鐘沒有上色表示火太小；反之顏色太深則火太大）</li>
+            <li>翻面再煎 2 分鐘，魚皮煎出焦黃色後翻面，再煎 2 分鐘到魚肉那面呈現焦黃色。</li>
+          </ol>
+        </div>
+      </details>
+
     </div>
   </div>
 </section>
@@ -706,6 +887,24 @@
         </div>
       </details>
 
+      <details class="faq-item" id="faq-custom"
+        data-keywords="客製,調整,可以改嗎,加糖,不加糖,米酒,不要米酒,少鹽,不要蔥,忌口,特殊需求,可以不要,調味">
+        <summary>辣度、加糖、加米酒…這些可以調整嗎？</summary>
+        <div class="faq-a">
+          <p><b>任何客製調整的需求，都可以在訂購時討論</b>，在能夠客製的範圍內我們會盡可能協助您。</p>
+          <p>直接在 LINE 跟老闆家說就好。</p>
+        </div>
+      </details>
+
+      <details class="faq-item" id="faq-combo"
+        data-keywords="五入,5包,組合,混搭,可以混嗎,不同口味,組合優惠,湊三包,三包組,不同品項">
+        <summary>五入組合可以混搭口味嗎？</summary>
+        <div class="faq-a">
+          <p><b>需要同口味才有組合優惠喔！</b></p>
+          <p>想一次多買幾種不同口味，可以分開單包購買。</p>
+        </div>
+      </details>
+
       <details class="faq-item" id="faq-shelf"
         data-keywords="保存,放多久,期限,效期,保存期限,可以放,冷凍多久,幾個月,能放多久,存放,過期,保鮮">
         <summary>冷凍可以放多久？</summary>
@@ -719,13 +918,13 @@
         data-keywords="幾人份,份量,多少量,一包多少,夠幾個人,大小包,人份,吃幾餐,幾個人吃,份數,大包小包差別">
         <summary>一包是幾人份？</summary>
         <div class="faq-a">
-          <p>每道菜的份量不太一樣，幾個實際例子：</p>
+          <p>這題有點難答，因為每個人食量不同。抓一個大概：</p>
           <ul>
-            <li><b>客家控肉</b>：小包約 1～2 人份、大包約 2～3 人份</li>
-            <li><b>麻婆肉醬</b>：1 包可以煮出 2～3 人份</li>
-            <li><b>素麻婆醬</b>：1 包約 1～2 人份</li>
+            <li><b>小包</b>：多數是 <b>1 人份</b>，大約一支去骨雞腿排的肉量</li>
+            <li><b>炸醬、肉燥類的小包</b>：大約 <b>2 人份</b></li>
+            <li><b>大包</b>：小包的 <b>2.5～3 倍</b>肉量（依品項不同而異）</li>
           </ul>
-          <p>想確認特定品項的份量，問一下就好。</p>
+          <p>⚠️ 每次<b>退冰加熱後，建議當餐吃完</b>。</p>
         </div>
       </details>
 
@@ -733,12 +932,13 @@
         data-keywords="加熱,怎麼煮,退冰,微波,電鍋,隔水加熱,怎麼吃,料理方式,解凍,怎麼加熱,加熱方式">
         <summary>怎麼加熱？</summary>
         <div class="faq-a">
-          <p>基本上就是退冰之後加熱：</p>
           <ul>
-            <li><b>大部分品項</b>：退冰 → 倒進碗裡 → 電鍋加熱 → 完成</li>
-            <li><b>麻婆肉醬</b>：退冰加熱後，倒入切好的嫩豆腐，輕輕翻煮幾分鐘就能上桌</li>
+            <li><b>湯類、肉燥類</b>：電鍋加熱最省事</li>
+            <li><b>炒雞腿丁類</b>：建議用平底鍋加一點水翻炒收乾，最接近現炒的口感</li>
+            <li><b>鹽麴腿排</b>：料理方式很多，<b>包裝袋上的標籤有簡單教學</b>；不會用還是可以問我們</li>
+            <li><b>麻婆肉醬</b>：退冰加熱後倒入切好的嫩豆腐，輕輕翻煮幾分鐘就能上桌</li>
           </ul>
-          <p>不確定某一道怎麼弄，問老闆家。</p>
+          <p>很多客人跟我們分享<b>微波也很方便</b>，你也可以試試看！</p>
         </div>
       </details>
 
@@ -748,7 +948,7 @@
         <div class="faq-a">
           <ul>
             <li>超商冷凍取貨（全家／7-ELEVEN）：滿 <b>$1300</b> 免運，未滿運費 <b>$129</b></li>
-            <li>黑貓冷凍宅配：滿 <b>$3300</b> 免運，未滿運費 <b>$250</b></li>
+            <li>黑貓冷凍宅配：滿 <b>$3300</b> 免運，未滿運費 <b>$225</b></li>
           </ul>
           <p>購物車會自動幫你算「再差多少就免運」，也會顯示未滿的運費。</p>
         </div>

@@ -557,6 +557,89 @@ section { padding: 64px 0; }
 }
 .cart-total { font-weight: 700; margin-bottom: 20px; font-size: 1.1rem; }
 
+/* ── 食譜建議 ────────────────────────────────────────────
+   沿用問答的摺疊樣式，客人一眼看得到有幾道菜，不用先滑過整篇。 */
+.recipes { background: var(--bg); }
+.recipes .section-subtitle a {
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid var(--gold);
+}
+.recipe-list { max-width: 720px; margin: 0 auto; }
+.recipe-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.recipe-item summary {
+  padding: 16px 20px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.02rem;
+  color: var(--gold);
+  list-style: none;
+}
+.recipe-item summary::-webkit-details-marker { display: none; }
+.recipe-item summary::before { content: "🍳 "; }
+.recipe-item summary::after {
+  content: "＋";
+  float: right;
+  color: var(--gold);
+}
+.recipe-item[open] summary::after { content: "－"; }
+.recipe-body { padding: 0 20px 22px; }
+
+/* 老闆家做的圖卡：適合存手機、傳 LINE，所以整張可點開看大圖 */
+.recipe-card {
+  display: block;
+  max-width: 340px;
+  margin: 0 auto 20px;
+  text-decoration: none;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--ink);
+}
+.recipe-card img { width: 100%; height: auto; }
+.recipe-card-hint {
+  display: block;
+  padding: 8px 10px;
+  text-align: center;
+  font-size: 0.76rem;
+  color: var(--text-mute);
+}
+.recipe-card:hover { border-color: var(--gold); }
+.recipe-card:hover .recipe-card-hint { color: var(--gold); }
+
+.recipe-ing {
+  background: var(--ink);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  margin-bottom: 18px;
+  font-size: 0.88rem;
+  color: var(--text-mute);
+  line-height: 1.9;
+}
+.recipe-ing b { color: var(--gold); }
+.recipe-body ol {
+  margin: 0 0 16px 1.4em;
+  color: var(--text-mute);
+  font-size: 0.93rem;
+  line-height: 1.85;
+}
+.recipe-body ol li { margin-bottom: 10px; }
+.recipe-tip {
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+  font-size: 0.86rem;
+  color: var(--text-mute);
+  line-height: 1.85;
+}
+.recipe-tip b { color: var(--gold); }
+
 /* ── 常見問題 自助問答 ─────────────────────────────────── */
 .faq { background: var(--surface); }
 .faq-form {
