@@ -180,6 +180,15 @@
 <!-- 注意：不要在這裡放 id="top"。頁首是 position:sticky，永遠貼在視窗頂端，
      瀏覽器會判定「錨點已經在畫面上」而完全不捲動，回頂端就變成按了沒反應。
      拿掉 id 之後，#top 會走 HTML 規格的預設行為＝捲到文件最上方。 -->
+<!-- 活動公告條
+     data-start / data-end 留空 = 永久顯示；填日期（YYYY-MM-DD）就會自動上下架，
+     不需要有人記得回來拿掉。期間限定的活動一律用日期，不要留空。
+     預設在 HTML 裡是顯示的，js/ui.js 才依日期隱藏 —— 沒有 JavaScript 也看得到。 -->
+<a class="promo-bar" id="promo-bar" href="#order" data-start="" data-end="">
+  <b>🎉 網站首次下單，單筆滿 $500 折 $50</b>
+  <span>送出訂單時跟老闆家說一聲「網站首購」就好</span>
+</a>
+
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href="#top">

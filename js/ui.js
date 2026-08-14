@@ -18,6 +18,7 @@
     });
   }
 
+  promoBar();
   featureCarousel();
 
   var fab = document.getElementById("fab-top");
@@ -34,6 +35,34 @@
     },
     { threshold: 0 }
   ).observe(hero);
+
+  /**
+   * 活動公告條的自動上下架。
+   *
+   * data-start / data-end 是 YYYY-MM-DD，留空代表不限。時間到了自己消失，
+   * 不必有人記得回來拿掉 —— 網站上掛著過期活動比沒有活動更傷信任。
+   *
+   * 日期用看訪客裝置的時鐘判斷（靜態網站沒有伺服器）。有人把手機日期調錯
+   * 就會看到不該看到的公告，但那是極少數，且後果只是多看到一則優惠。
+   */
+  function promoBar() {
+    var bar = document.getElementById("promo-bar");
+    if (!bar) return;
+
+    var start = bar.getAttribute("data-start");
+    var end = bar.getAttribute("data-end");
+    if (!start && !end) return;                 // 兩個都沒填 = 永久顯示，不用管
+
+    var now = new Date();
+    var today = now.getFullYear() + "-" +
+      String(now.getMonth() + 1).padStart(2, "0") + "-" +
+      String(now.getDate()).padStart(2, "0");
+
+    // 字串直接比大小就好：YYYY-MM-DD 這種格式的字典順序等同時間順序
+    var tooEarly = start && today < start;
+    var tooLate = end && today > end;
+    if (tooEarly || tooLate) bar.hidden = true;
+  }
 
   /**
    * 商品特色手機輪播的圓點與自動播放。
