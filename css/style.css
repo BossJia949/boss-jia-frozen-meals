@@ -451,6 +451,23 @@ section { padding: 64px 0; }
   margin-top: 8px;
 }
 
+/* 招牌菜的來歷。放在分類照片與品項清單之間，講得完一個故事又不會擋到選購。 */
+.dish-note {
+  /* 分類照片是 float:right。沒有這行的話，這個區塊的底色與金色左框
+     會整片延伸到照片底下，看起來像破圖。flow-root 讓它自成一個
+     排版區塊、自動避開浮動元素。 */
+  display: flow-root;
+  background: var(--surface);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  padding: 14px 18px;
+  margin-bottom: 18px;
+  font-size: 0.92rem;
+  line-height: 1.95;
+  color: var(--text-mute);
+}
+.dish-note b { color: var(--gold); }
+
 .menu-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
