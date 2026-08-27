@@ -594,6 +594,36 @@ section { padding: 64px 0; }
 }
 .cart-total { font-weight: 700; margin-bottom: 20px; font-size: 1.1rem; }
 
+/* 電腦版的「複製→貼上」兩步驟。
+   LINE 的 oaMessage 網址只支援手機，桌機會被轉到 line.me 首頁、訂單消失，
+   所以電腦上改成讓客人複製訂單文字。由 cart.js 依裝置切換顯示。 */
+.cart-desktop[hidden] { display: none; }
+.cart-desktop .btn { display: block; width: 100%; margin-bottom: 10px; }
+.cart-copy-ok,
+#cart-copy-btn.is-copied { background: var(--gold-light); }
+.cart-desktop-hint {
+  font-size: 0.82rem;
+  color: var(--text-mute);
+  line-height: 1.8;
+  margin: 14px 0 10px;
+  text-align: left;
+}
+.cart-desktop-hint b { color: var(--gold); }
+.cart-order-text {
+  width: 100%;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 0.85rem;
+  line-height: 1.8;
+  font-family: inherit;
+  resize: vertical;
+}
+.cart-order-text:focus { outline: none; border-color: var(--gold); }
+#cart-line-btn[hidden] { display: none; }
+
 /* ── 食譜建議 ────────────────────────────────────────────
    沿用問答的摺疊樣式，客人一眼看得到有幾道菜，不用先滑過整篇。 */
 .recipes { background: var(--bg); }

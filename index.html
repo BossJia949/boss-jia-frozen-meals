@@ -764,7 +764,22 @@
       </fieldset>
 
       <p id="shipping-hint" class="shipping-hint"></p>
+
+      <!-- 手機：一鍵把訂單帶進 LINE。
+           電腦：LINE 的 oaMessage 網址只支援手機，桌機瀏覽器會被 302 踢到
+           line.me 首頁、訂單整個消失，所以改成「複製→貼上」兩步驟。
+           由 cart.js 依裝置決定顯示哪一組。 -->
       <a id="cart-line-btn" class="btn btn-line" href="https://lin.ee/PQPzlSx" target="_blank" rel="noopener">加LINE送出訂單</a>
+
+      <div id="cart-desktop" class="cart-desktop" hidden>
+        <button type="button" id="cart-copy-btn" class="btn btn-primary">① 複製訂單內容</button>
+        <a id="cart-open-line" class="btn btn-line" href="https://lin.ee/PQPzlSx" target="_blank" rel="noopener">② 開啟 LINE 貼上</a>
+        <p class="cart-desktop-hint">
+          電腦版沒辦法自動帶入訂單，<b>請先複製再貼到 LINE</b> 傳給老闆家（<b>@727qzmzu</b>）。<br>
+          用手機開這個網站的話，可以一鍵直接送出。
+        </p>
+        <textarea id="cart-order-text" class="cart-order-text" readonly rows="6" aria-label="訂單內容，可複製"></textarea>
+      </div>
     </div>
   </div>
 </section>

@@ -77,9 +77,35 @@
       .sort(function (a, b) { return b.score - a.score; });
   }
 
+  // 跟 cart.js 同一套判斷：LINE 的 oaMessage 網址只有手機能用，
+  // 桌機會被 302 轉去 line.me 首頁，帶的訊息整個不見。
+  var CAN_DEEP_LINK = (function () {
+    var ua = navigator.userAgent || "";
+    if (/Android|iPhone|iPad|iPod|Windows Phone|Mobile/i.test(ua)) return true;
+    if (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1) return true;
+    return false;
+  })();
+
+  var LINE_ADD_URL = "https://lin.ee/PQPzlSx";
+
   function lineUrl(text) {
+    if (!CAN_DEEP_LINK) return LINE_ADD_URL;
     return "https://line.me/R/oaMessage/" + LINE_ID + "/?" + encodeURIComponent(text);
   }
+
+  /** 電腦版按「問老闆家」時，順手把問題複製起來，客人開了 LINE 直接貼 */
+  function copyQuestion(text) {
+    if (CAN_DEEP_LINK || !text) return;
+    try {
+      if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text);
+    } catch (e) { /* 複製失敗不影響開啟 LINE，客人自己打字就好 */ }
+  }
+
+  // 電腦版的說明文字不一樣：桌機帶不進訊息，要講清楚是「複製好了，去貼上」
+  var ASK_LABEL = CAN_DEEP_LINK ? "直接問老闆家" : "複製問題並開啟 LINE";
+  var MISS_CTA = CAN_DEEP_LINK
+    ? "把這個問題傳給老闆家"
+    : "複製問題並開啟 LINE（電腦版請自行貼上）";
 
   function showAnswer(item) {
     answerEl.hidden = false;
@@ -87,8 +113,9 @@
       '<h3 class="faq-answer-q">' + escapeHtml(item.q) + "</h3>" +
       '<div class="faq-answer-body">' + item.html + "</div>" +
       '<p class="faq-answer-more">還是不清楚嗎？' +
-      '<a class="faq-answer-link" target="_blank" rel="noopener" href="' +
-      lineUrl("您好，我想請問：" + item.q) + '">直接問老闆家</a></p>';
+      '<a class="faq-answer-link" target="_blank" rel="noopener" data-ask="' +
+      escapeHtml("您好，我想請問：" + item.q) + '" href="' +
+      lineUrl("您好，我想請問：" + item.q) + '">' + ASK_LABEL + "</a></p>";
     answerEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
 
@@ -105,9 +132,9 @@
     answerEl.hidden = false;
     answerEl.innerHTML =
       '<p class="faq-miss">這題我不太確定，直接問老闆最準 👇</p>' +
-      '<a class="btn btn-line faq-ask-line" target="_blank" rel="noopener" href="' +
-      lineUrl("您好，我想請問：" + query) +
-      '">把這個問題傳給老闆家</a>' +
+      '<a class="btn btn-line faq-ask-line" target="_blank" rel="noopener" data-ask="' +
+      escapeHtml("您好，我想請問：" + query) + '" href="' +
+      lineUrl("您好，我想請問：" + query) + '">' + MISS_CTA + "</a>" +
       (suggestions
         ? '<p class="faq-suggest-title">你是不是想問這些？</p><div class="faq-suggest-row">' +
           suggestions + "</div>"
@@ -147,6 +174,8 @@
   document.addEventListener("click", function (e) {
     var t = e.target;
     if (!t || !t.classList) return;
+    // 電腦版：點「問老闆家」時先把問題複製起來，客人開了 LINE 直接貼
+    if (t.hasAttribute && t.hasAttribute("data-ask")) copyQuestion(t.getAttribute("data-ask"));
     if (t.classList.contains("faq-chip") || t.classList.contains("faq-suggest")) {
       var found = items.filter(function (it) { return it.id === t.getAttribute("data-id"); })[0];
       if (found) {

@@ -12,8 +12,28 @@
   const miniCountEl = document.getElementById("mini-cart-count");
   const miniTotalEl = document.getElementById("mini-cart-total");
   const shippingRadios = document.querySelectorAll('input[name="shipping"]');
+  const desktopBox = document.getElementById("cart-desktop");
+  const copyBtn = document.getElementById("cart-copy-btn");
+  const orderTextEl = document.getElementById("cart-order-text");
 
-  /** 目前選的配送方式。超商 門檻$1300/運費$129、黑貓 門檻$3300/運費$250，兩者都不同 */
+  /**
+   * 這台裝置能不能用 LINE 的 oaMessage 網址一鍵帶入訊息？
+   *
+   * 只有手機可以。桌機瀏覽器打 line.me/R/oaMessage/... 會被 LINE 302 轉到
+   * line.me 首頁，訂單整個消失（2026-08-15 老闆家回報，實測確認）。
+   * 判斷失準的後果很輕：手機被誤判成電腦只是多看到複製按鈕，不會壞掉。
+   */
+  function canOpenLineWithMessage() {
+    const ua = navigator.userAgent || "";
+    if (/Android|iPhone|iPad|iPod|Windows Phone|Mobile/i.test(ua)) return true;
+    // iPad 從 iOS 13 起 UA 會偽裝成 Mac，改用觸控點數辨識
+    if (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1) return true;
+    return false;
+  }
+
+  const canDeepLink = canOpenLineWithMessage();
+
+  /** 目前選的配送方式。超商 門檻$1300/運費$129、黑貓 門檻$3300/運費$225，兩者都不同 */
   function selectedShipping() {
     const picked = document.querySelector('input[name="shipping"]:checked');
     return {
@@ -73,11 +93,8 @@
     }
   }
 
-  function updateLineLink(items, total) {
-    if (items.length === 0) {
-      cartLineBtn.href = LINE_ADD_URL;
-      return;
-    }
+  /** 訂單文字。手機拿去塞進 LINE 網址，電腦拿去給客人複製，同一份不會不一致 */
+  function buildOrderText(items, total) {
     const lines = items.map(
       (i) => `${i.name}（${i.variant}）x${i.qty}　NT$${i.price * i.qty}`
     );
@@ -85,12 +102,75 @@
     // 未達免運就把運費寫進訂單，老闆家不用自己記哪一種要收多少
     const shipNote =
       total >= ship.threshold ? "（已達免運）" : `（未達免運，運費 NT$${ship.fee}）`;
-    const message =
+    return (
       "您好，我想訂購：\n" +
       lines.join("\n") +
       `\n合計：NT$${total}` +
-      `\n配送方式：${ship.label}${shipNote}`;
-    cartLineBtn.href = `https://line.me/R/oaMessage/${LINE_ID}/?${encodeURIComponent(message)}`;
+      `\n配送方式：${ship.label}${shipNote}`
+    );
+  }
+
+  function updateLineLink(items, total) {
+    const empty = items.length === 0;
+
+    // 電腦版：沒有購物車內容就不用出現複製區，免得畫面上都是空按鈕
+    if (desktopBox) desktopBox.hidden = canDeepLink || empty;
+
+    if (empty) {
+      cartLineBtn.href = LINE_ADD_URL;
+      if (orderTextEl) orderTextEl.value = "";
+      return;
+    }
+
+    const message = buildOrderText(items, total);
+    if (orderTextEl) orderTextEl.value = message;
+
+    if (canDeepLink) {
+      cartLineBtn.href = `https://line.me/R/oaMessage/${LINE_ID}/?${encodeURIComponent(message)}`;
+    } else {
+      // 桌機打 oaMessage 會被 LINE 轉去首頁、訂單消失，所以連結只留加好友用
+      cartLineBtn.href = LINE_ADD_URL;
+    }
+  }
+
+  /** 複製訂單。優先用新的剪貼簿 API，失敗再退回選取 textarea 的老方法 */
+  async function copyOrder() {
+    const text = orderTextEl ? orderTextEl.value : "";
+    if (!text) return;
+    let ok = false;
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        ok = true;
+      }
+    } catch (e) {
+      ok = false;
+    }
+    if (!ok) {
+      try {
+        orderTextEl.removeAttribute("readonly");
+        orderTextEl.focus();
+        orderTextEl.setSelectionRange(0, text.length);
+        ok = document.execCommand("copy");
+        orderTextEl.setAttribute("readonly", "");
+      } catch (e) {
+        ok = false;
+      }
+    }
+    // 複製不成功也要給出路：叫客人自己選取下面那格文字
+    copyBtn.textContent = ok ? "✓ 已複製，接著開 LINE 貼上" : "請手動選取下方文字複製";
+    copyBtn.classList.toggle("is-copied", ok);
+    setTimeout(() => {
+      copyBtn.textContent = "① 複製訂單內容";
+      copyBtn.classList.remove("is-copied");
+    }, 4000);
+  }
+
+  if (copyBtn) copyBtn.addEventListener("click", copyOrder);
+
+  // 桌機把主按鈕換成明確的用途，免得客人以為按了就送出了
+  if (!canDeepLink) {
+    cartLineBtn.hidden = true;
   }
 
   document.querySelectorAll(".btn-add").forEach((btn) => {
