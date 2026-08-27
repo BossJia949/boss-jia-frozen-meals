@@ -40,7 +40,18 @@
       label: picked.value,
       threshold: Number(picked.dataset.threshold),
       fee: Number(picked.dataset.fee),
+      pay: picked.dataset.pay,
     };
+  }
+
+  /** 付款方式跟配送方式綁定：超商＝貨到付款、黑貓＝匯款。選的當下就講，不要等客人問 */
+  function renderPaymentHint() {
+    const el = document.getElementById("payment-hint");
+    if (!el) return;
+    const { pay } = selectedShipping();
+    el.textContent = pay === "匯款"
+      ? "這個方式是「匯款」，訂單確認後跟老闆家拿匯款資訊"
+      : "這個方式是「貨到付款」，到超商取貨時付款";
   }
 
   function renderCart() {
@@ -77,6 +88,7 @@
     miniCountEl.textContent = `${count} 項`;
     miniTotalEl.textContent = `NT$ ${total}`;
     renderShippingHint(total);
+    renderPaymentHint();
     updateLineLink(items, total);
   }
 
@@ -106,7 +118,9 @@
       "您好，我想訂購：\n" +
       lines.join("\n") +
       `\n合計：NT$${total}` +
-      `\n配送方式：${ship.label}${shipNote}`
+      `\n配送方式：${ship.label}${shipNote}` +
+      // 寫進訂單，省掉「那我要怎麼付錢」這一輪來回
+      `\n付款方式：${ship.pay}`
     );
   }
 

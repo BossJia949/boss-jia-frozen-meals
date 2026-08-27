@@ -932,6 +932,16 @@ section { padding: 64px 0; }
   color: var(--gold);
 }
 
+/* 付款方式提示：跟著選的配送方式變，讓客人選的當下就知道怎麼付 */
+.payment-hint {
+  margin: 6px 6px 0;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  font-size: 0.8rem;
+  color: var(--text-mute);
+  line-height: 1.7;
+}
+
 .shipping-hint {
   font-size: 0.85rem;
   color: var(--gold);
