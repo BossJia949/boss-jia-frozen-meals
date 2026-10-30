@@ -225,20 +225,33 @@
 
 <main>
 
-<!-- ══ 限時組合（任選 N 包）══
-     整個區塊靠下面這幾個 data-* 控制，改檔期／品項／價格都只動這塊 HTML，不用碰程式：
-       data-start / data-end  檔期起訖（含當天）。js/combo.js 只在範圍內才顯示
-       data-size              要選幾包才成一組
-       data-price             整組的價格
-       data-compare           單買同樣數量的原價，用來算省多少；不想顯示就留空
+<!-- ══ 限時組合（任選 N 包）══ 目前狀態：草稿，客人看不到 ══
 
-     ⚠️ 預設帶 hidden，由 JS 在檔期內才打開。
-     這樣「檔期已過」與「瀏覽器沒跑 JavaScript」兩種情況都是不顯示 ——
-     失敗的方向是「看不到」，不會讓客人看到過期的價格然後下單。
+     ⚠️⚠️ 下面的名稱、品項、價格、日期全部是示範用的假資料。
+     老闆家還沒決定要開這檔，也還沒拍板價格。**不要動 data-live**。
 
-     想在上架前先看長什麼樣：網址加 ?preview=combo，會強制顯示並標明是預覽。 -->
+     要客人看得到，三個條件必須同時成立（缺一個就整塊從頁面移除）：
+       ① data-live="on"      ← 人工開關。活動確定要開、價格拍板了才改成 on
+       ② data-start / data-end 兩個都有填（YYYY-MM-DD，含當天）
+       ③ 今天在起訖日之間
+
+     ①的意義：**日期到了也不會自己上架。** 沒有人把開關撥到 on，
+     這塊永遠是草稿。不會發生「還在討論的優惠突然出現在網站上」。
+     ③的意義：檔期過了自己下架，不用記得回來移除。
+
+     其餘設定（改這裡就好，不用動 js/combo.js）：
+       data-size     要選幾包才成一組
+       data-price    整組的價格
+       data-compare  單買同樣數量的原價，用來算省多少；不想顯示就留空
+       品項          就是底下的 <li class="combo-opt" data-name="...">
+
+     另外這個 section 預設帶 hidden，由 JS 判斷後才打開 ——
+     所以連「瀏覽器沒跑 JavaScript」也是不顯示。失敗方向永遠是「看不到」。
+
+     要先看版面長什麼樣：網址加 ?preview=combo，會強制顯示並標明客人看不到。 -->
 <section class="combo" id="combo" hidden
-         data-start="2026-11-10" data-end="2026-11-16"
+         data-live="off"
+         data-start="" data-end=""
          data-size="5" data-price="880" data-compare="950">
   <div class="container">
     <p class="combo-flag">限時組合</p>

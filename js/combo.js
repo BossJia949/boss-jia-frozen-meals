@@ -30,12 +30,21 @@
   var start = sec.dataset.start;
   var end = sec.dataset.end;
   var now = today();
-  var inRange = (!start || now >= start) && (!end || now <= end);
 
-  // 檔期外就整塊移除 —— 老闆家要的是「期限過後把區塊拿掉」。
-  // 區塊在 HTML 裡預設帶 hidden，所以沒跑到這裡（例如瀏覽器擋掉 JS）也是不顯示，
-  // 失敗方向永遠是「看不到」，不會讓客人看到過期的價格然後下單。
-  if (!inRange && !PREVIEW) {
+  // ── 要三個條件同時成立，客人才看得到。缺任何一個都整塊移除。 ──
+  //
+  // ① data-live 必須正好是 "on"。**這是人工開關**：沒有老闆家點頭，
+  //    就算日期到了也不會上架。活動還在討論、價格還沒定的草稿，
+  //    絕對不會因為日曆翻頁就自己跑出來給客人看。
+  // ② 起訖日兩個都要填。只填一個 = 設定沒寫完 = 不顯示。
+  // ③ 今天要在起訖日之間（含當天）。過期自動下架，不用記得回來移除。
+  var LIVE = sec.dataset.live === "on";
+  var hasDates = !!(start && end);
+  var inRange = hasDates && now >= start && now <= end;
+
+  // 區塊在 HTML 裡預設帶 hidden，所以連這支程式沒跑到（瀏覽器擋掉 JS）也是不顯示。
+  // 失敗方向永遠是「看不到」—— 不會讓客人看到沒拍板的價格然後下單。
+  if (!(LIVE && inRange) && !PREVIEW) {
     sec.remove();
     return;
   }
@@ -43,12 +52,15 @@
 
   var datesEl = document.getElementById("combo-dates");
   if (datesEl) {
-    var range = slash(start) + " – " + slash(end);
-    datesEl.textContent = PREVIEW && !inRange
-      ? "👁 預覽模式：這檔是 " + range + "，客人現在看不到"
-      : "活動期間 " + range + "　‧　整組 NT$" + PRICE +
-        (COMPARE > PRICE ? "（單買 " + SIZE + " 包要 $" + COMPARE + "，省 $" + (COMPARE - PRICE) + "）" : "");
-    if (PREVIEW && !inRange) datesEl.classList.add("is-preview");
+    var range = hasDates ? slash(start) + " – " + slash(end) : "日期還沒填";
+    var draft = !LIVE || !inRange;
+    // 預覽時要講清楚「為什麼客人看不到」，才知道還差哪一步沒做
+    datesEl.textContent = !draft
+      ? "活動期間 " + range + "　‧　整組 NT$" + PRICE +
+        (COMPARE > PRICE ? "（單買 " + SIZE + " 包要 $" + COMPARE + "，省 $" + (COMPARE - PRICE) + "）" : "")
+      : "👁 預覽模式．客人看不到　‧　" +
+        (!LIVE ? "草稿（data-live 還不是 on）" : "尚未到檔期") + "：" + range;
+    datesEl.classList.toggle("is-preview", draft);
   }
 
   var countEl = document.getElementById("combo-count");
