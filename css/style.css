@@ -113,6 +113,25 @@ img { max-width: 100%; display: block; }
 .btn-line { background: var(--line-green); color: #fff; }
 .btn-sm { padding: 8px 18px; font-size: 0.85rem; }
 .btn-lg { padding: 16px 40px; font-size: 1.1rem; }
+
+/* 次要按鈕：金色外框、底透明。跟主按鈕並排時分得出主從，
+   但在首頁照片上與在深墨綠頁面上都看得清楚（金色對深底 7.0:1）。
+   padding 比 .btn 少 2px 是為了補掉 2px 外框，兩顆並排時高度才會一樣。 */
+.btn-ghost {
+  background: transparent;
+  color: var(--gold);
+  border: 2px solid var(--gold);
+  padding: 10px 26px;
+}
+.btn-ghost:hover { background: rgba(248,184,88,0.14); }
+
+/* 首頁兩顆按鈕並排，手機放不下就自動換行 */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
 .btn-add {
   background: var(--gold);
   color: var(--green-deepest);
@@ -397,13 +416,12 @@ section { padding: 64px 0; }
   margin: -24px 0 32px;
   font-size: 0.9rem;
 }
-.menu-download a {
-  color: var(--gold);
-  text-decoration: none;
-  border-bottom: 1px solid var(--gold);
-  padding-bottom: 2px;
+.menu-download-note {
+  display: block;
+  margin-top: 8px;
+  color: var(--text-mute);
+  font-size: 0.85rem;
 }
-.menu-download a:hover { color: var(--gold-light); }
 
 .cat-title {
   display: flex;

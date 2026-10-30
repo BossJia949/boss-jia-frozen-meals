@@ -213,7 +213,13 @@
   <div class="hero-overlay">
     <h1>老闆家</h1>
     <p class="hero-slogan">用營養師的標準做料理．用給家人的標準選食材</p>
-    <a href="#products" class="btn btn-primary">看菜單</a>
+    <div class="hero-actions">
+      <a href="#products" class="btn btn-primary">看菜單</a>
+      <!-- PDF 放在這裡是因為客人反映找不到（原本只在商品區中段與頁尾）。
+           刻意做成次要樣式：PDF 裡沒有購物車，是給人「轉傳給家人」用的，
+           不是第二種逛法。做得跟「看菜單」一樣醒目，會把人帶離訂購動線。 -->
+      <a href="冷凍包菜單.pdf" class="btn btn-ghost" target="_blank" rel="noopener">📄 下載菜單 PDF</a>
+    </div>
   </div>
 </section>
 
@@ -362,7 +368,8 @@
     </div>
 
     <p class="menu-download">
-      <a href="冷凍包菜單.pdf" target="_blank" rel="noopener">📄 下載完整菜單 PDF（方便轉傳給家人）</a>
+      <a class="btn btn-ghost btn-sm" href="冷凍包菜單.pdf" target="_blank" rel="noopener">📄 下載完整菜單 PDF</a>
+      <span class="menu-download-note">整份菜單一個檔案，方便轉傳給家人</span>
     </p>
 
     <!-- 輕鬆上桌 -->
