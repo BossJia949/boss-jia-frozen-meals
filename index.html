@@ -225,6 +225,85 @@
 
 <main>
 
+<!-- ══ 限時組合（任選 N 包）══
+     整個區塊靠下面這幾個 data-* 控制，改檔期／品項／價格都只動這塊 HTML，不用碰程式：
+       data-start / data-end  檔期起訖（含當天）。js/combo.js 只在範圍內才顯示
+       data-size              要選幾包才成一組
+       data-price             整組的價格
+       data-compare           單買同樣數量的原價，用來算省多少；不想顯示就留空
+
+     ⚠️ 預設帶 hidden，由 JS 在檔期內才打開。
+     這樣「檔期已過」與「瀏覽器沒跑 JavaScript」兩種情況都是不顯示 ——
+     失敗的方向是「看不到」，不會讓客人看到過期的價格然後下單。
+
+     想在上架前先看長什麼樣：網址加 ?preview=combo，會強制顯示並標明是預覽。 -->
+<section class="combo" id="combo" hidden
+         data-start="2026-11-10" data-end="2026-11-16"
+         data-size="5" data-price="880" data-compare="950">
+  <div class="container">
+    <p class="combo-flag">限時組合</p>
+    <h2 class="combo-title">暖冬雞湯．任選 5 包</h2>
+    <p class="combo-dates" id="combo-dates"></p>
+    <p class="combo-sub">六種雞湯自由搭配，同一種想選幾包都可以。</p>
+
+    <ul class="combo-pool">
+      <li class="combo-opt" data-name="魚池香菇雞湯">
+        <span class="combo-opt-name">魚池香菇雞湯</span>
+        <span class="combo-steps">
+          <button type="button" class="combo-step" data-step="-1" aria-label="魚池香菇雞湯 減一包">−</button>
+          <span class="combo-qty" data-qty>0</span>
+          <button type="button" class="combo-step" data-step="1" aria-label="魚池香菇雞湯 加一包">＋</button>
+        </span>
+      </li>
+      <li class="combo-opt" data-name="濃白蒜頭雞湯">
+        <span class="combo-opt-name">濃白蒜頭雞湯</span>
+        <span class="combo-steps">
+          <button type="button" class="combo-step" data-step="-1" aria-label="濃白蒜頭雞湯 減一包">−</button>
+          <span class="combo-qty" data-qty>0</span>
+          <button type="button" class="combo-step" data-step="1" aria-label="濃白蒜頭雞湯 加一包">＋</button>
+        </span>
+      </li>
+      <li class="combo-opt" data-name="剝皮辣椒雞湯">
+        <span class="combo-opt-name">剝皮辣椒雞湯<em class="combo-opt-note">會辣，無法做不辣</em></span>
+        <span class="combo-steps">
+          <button type="button" class="combo-step" data-step="-1" aria-label="剝皮辣椒雞湯 減一包">−</button>
+          <span class="combo-qty" data-qty>0</span>
+          <button type="button" class="combo-step" data-step="1" aria-label="剝皮辣椒雞湯 加一包">＋</button>
+        </span>
+      </li>
+      <li class="combo-opt" data-name="牛蒡雲耳雞湯">
+        <span class="combo-opt-name">牛蒡雲耳雞湯</span>
+        <span class="combo-steps">
+          <button type="button" class="combo-step" data-step="-1" aria-label="牛蒡雲耳雞湯 減一包">−</button>
+          <span class="combo-qty" data-qty>0</span>
+          <button type="button" class="combo-step" data-step="1" aria-label="牛蒡雲耳雞湯 加一包">＋</button>
+        </span>
+      </li>
+      <li class="combo-opt" data-name="鳳梨蔭瓜雞湯">
+        <span class="combo-opt-name">鳳梨蔭瓜雞湯</span>
+        <span class="combo-steps">
+          <button type="button" class="combo-step" data-step="-1" aria-label="鳳梨蔭瓜雞湯 減一包">−</button>
+          <span class="combo-qty" data-qty>0</span>
+          <button type="button" class="combo-step" data-step="1" aria-label="鳳梨蔭瓜雞湯 加一包">＋</button>
+        </span>
+      </li>
+      <li class="combo-opt" data-name="白胡椒雞湯">
+        <span class="combo-opt-name">白胡椒雞湯</span>
+        <span class="combo-steps">
+          <button type="button" class="combo-step" data-step="-1" aria-label="白胡椒雞湯 減一包">−</button>
+          <span class="combo-qty" data-qty>0</span>
+          <button type="button" class="combo-step" data-step="1" aria-label="白胡椒雞湯 加一包">＋</button>
+        </span>
+      </li>
+    </ul>
+
+    <div class="combo-bar">
+      <p class="combo-count" id="combo-count" role="status" aria-live="polite"></p>
+      <button type="button" class="btn btn-primary" id="combo-add" disabled>加入購物車</button>
+    </div>
+  </div>
+</section>
+
 <!-- 分類大圖導覽：照片就是入口，點了跳到商品區對應分類 -->
 <section class="cat-nav" id="categories">
   <div class="container">
@@ -1138,6 +1217,8 @@
 </a>
 
 <script src="js/cart.js"></script>
+<!-- combo 要用 cart.js 建好的 window.BossJiaCart，所以一定排在它後面 -->
+<script src="js/combo.js"></script>
 <script src="js/faq.js"></script>
 <script src="js/ui.js"></script>
 </body>

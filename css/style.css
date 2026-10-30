@@ -416,6 +416,95 @@ section { padding: 64px 0; }
   margin: -24px 0 32px;
   font-size: 0.9rem;
 }
+/* ══ 限時組合 ══
+   放在首頁最上面，要跟底下的常態內容分得開，所以用比頁面亮一階的面板＋金色外框。
+   整塊只在檔期內出現（js/combo.js），過期自動移除。 */
+.combo {
+  background: var(--surface);
+  border-top: 3px solid var(--gold);
+  border-bottom: 3px solid var(--gold);
+  padding: 32px 0;
+  margin-bottom: 8px;
+}
+.combo-flag {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--green-deepest);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  padding: 4px 14px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+}
+.combo-title { font-size: 1.6rem; color: var(--gold); margin-bottom: 6px; }
+.combo-dates { color: var(--text); font-weight: 700; margin-bottom: 4px; }
+.combo-dates.is-preview { color: var(--gold-light); }
+.combo-sub { color: var(--text-mute); font-size: 0.9rem; margin-bottom: 20px; }
+
+.combo-pool {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.combo-opt {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--green-deepest);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+}
+/* 選過的品項要一眼看得出來，不然選到第 4 包會忘記自己選了哪些 */
+.combo-opt.is-picked { border-color: var(--gold); }
+.combo-opt-name { font-weight: 700; }
+.combo-opt-note {
+  display: block;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.78rem;
+  color: var(--raspberry-light);
+  margin-top: 2px;
+}
+.combo-steps { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+/* 40px 是手指點得準的下限，手機再放大到 44px（WCAG 的觸控目標建議值）。
+   這兩顆是整個組合區唯一要連點好幾次的東西，太小會點錯品項。 */
+.combo-step {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  background: transparent;
+  color: var(--gold);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.combo-step:hover:not(:disabled) { background: rgba(248,184,88,0.16); }
+.combo-step:disabled { opacity: 0.3; cursor: not-allowed; }
+.combo-qty { min-width: 1.4em; text-align: center; font-weight: 700; font-size: 1.1rem; }
+
+.combo-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+.combo-count { color: var(--text-mute); font-weight: 700; }
+.combo-count.is-ready { color: var(--gold); }
+
+@media (max-width: 600px) {
+  .combo-title { font-size: 1.3rem; }
+  .combo-step { width: 44px; height: 44px; }
+  .combo-bar { flex-direction: column; gap: 10px; }
+  .combo-bar .btn { width: 100%; }
+}
+
 .menu-download-note {
   display: block;
   margin-top: 8px;

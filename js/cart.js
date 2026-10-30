@@ -223,5 +223,17 @@
     }
   });
 
+  // 給限時組合（js/combo.js）用的唯一入口。組合自己決定品名、規格與整組價格，
+  // 這裡只負責收進購物車 —— 購物車不需要知道「組合」這個概念，
+  // 所以免運門檻、訂單文字、移除按鈕全部照舊運作，不用為組合開特例。
+  window.BossJiaCart = {
+    add: function (name, variant, price) {
+      var key = name + "|" + variant;
+      if (!cart[key]) cart[key] = { key: key, name: name, variant: variant, price: price, qty: 0 };
+      cart[key].qty += 1;
+      renderCart();
+    }
+  };
+
   renderCart();
 })();
