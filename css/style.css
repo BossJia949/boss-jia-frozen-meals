@@ -942,6 +942,17 @@ section { padding: 64px 0; }
 .faq-a li { margin-bottom: 6px; }
 .faq-a b { color: var(--text); }
 
+/* 限時組合上線時，由 js/combo.js 插進「五入組合可以混搭嗎」這條答案的最前面，
+   蓋掉「需要同口味」那句的衝突。檔期結束程式不會跑到那段，這句話就自己消失。 */
+.faq-combo-live {
+  background: rgba(248, 184, 88, 0.12);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 6px 6px 0;
+  padding: 9px 12px;
+  color: var(--text);
+}
+.faq-combo-live b { color: var(--gold); }
+
 /* Booking（整站唯一的亮色區塊，讓最後的 CTA 跳出來） */
 .booking { background: var(--gold-light); text-align: center; }
 .booking .section-title { color: var(--green-dark); }

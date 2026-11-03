@@ -225,10 +225,15 @@
 
 <main>
 
-<!-- ══ 限時組合（任選 N 包）══ 目前狀態：草稿，客人看不到 ══
+<!-- ══ 限時組合（任選 N 包）══ 目前狀態：上線中，11/3–11/9 ══
 
-     ⚠️⚠️ 下面的名稱、品項、價格、日期全部是示範用的假資料。
-     老闆家還沒決定要開這檔，也還沒拍板價格。**不要動 data-live**。
+     這一檔是 2026-11-03 老闆家拍板的：雞湯任選 5 包 $900，到 11/9（一）止。
+
+     data-compare 填 950 的依據：混搭只能用單包價買，$190×5＝$950，所以是省 $50。
+     （菜單上「3包 $550」那個規格要同口味，混搭的人用不到，不能拿來當對照。）
+
+     檔期結束不用回來處理 —— 11/10 起條件③不成立，整塊自動從頁面移除。
+     下一檔要重用：先把 data-live 改回 off，換掉日期價格品項，確定了才撥回 on。
 
      要客人看得到，三個條件必須同時成立（缺一個就整塊從頁面移除）：
        ① data-live="on"      ← 人工開關。活動確定要開、價格拍板了才改成 on
@@ -250,14 +255,18 @@
 
      要先看版面長什麼樣：網址加 ?preview=combo，會強制顯示並標明客人看不到。 -->
 <section class="combo" id="combo" hidden
-         data-live="off"
-         data-start="" data-end=""
-         data-size="5" data-price="880" data-compare="950">
+         data-live="on"
+         data-start="2026-11-03" data-end="2026-11-09"
+         data-size="5" data-price="900" data-compare="950">
   <div class="container">
     <p class="combo-flag">限時組合</p>
-    <h2 class="combo-title">暖冬雞湯．任選 5 包</h2>
+    <h2 class="combo-title">雞湯任選 5 包</h2>
     <p class="combo-dates" id="combo-dates"></p>
-    <p class="combo-sub">六種雞湯自由搭配，同一種想選幾包都可以。</p>
+    <!-- 「不限同口味」一定要寫出來：常見問題那條寫的是「五入組合需要同口味」。
+         客人只看到這裡能混搭、沒看到這是限時例外，會以為網站前後矛盾、
+         或是以為平常也能混。寫在這個區塊裡，檔期結束就跟著消失。 -->
+    <p class="combo-sub">六種雞湯自由搭配，同一種想選幾包都可以 ——
+      <b>活動期間不限同口味</b>。</p>
 
     <ul class="combo-pool">
       <li class="combo-opt" data-name="魚池香菇雞湯">

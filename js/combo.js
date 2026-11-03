@@ -63,6 +63,29 @@
     datesEl.classList.toggle("is-preview", draft);
   }
 
+  // 常見問題有一條寫「五入組合需要同口味才有組合優惠」，跟任選這一檔直接衝突。
+  // 客人看到活動能混搭、又看到 FAQ 說不能混，會以為網站講話不算話。
+  //
+  // 補在這裡而不是去改 index.html 的 FAQ 本文 —— 程式只有活動上線（或老闆家
+  // 自己開預覽）才會跑到這行，所以這句話會跟著檔期一起消失，不會變成 11/10
+  // 之後還掛在網站上的過期訊息。
+  //
+  // 順帶一個好處：js/faq.js 是在載入時讀 .faq-a 的 innerHTML 建搜尋索引，
+  // 而它排在這支程式後面，所以客人搜「混搭」看到的答案也會一起更新，不用另外處理。
+  var faqA = document.querySelector("#faq-combo .faq-a");
+  if (faqA) {
+    var note = document.createElement("p");
+    note.className = "faq-combo-live";
+    var tag = document.createElement("b");
+    tag.textContent = "限時活動期間例外：";
+    note.appendChild(tag);
+    note.appendChild(document.createTextNode(
+      "「" + TITLE + "」可以混搭，六種雞湯自由組合" +
+      (hasDates ? "（" + slash(start) + "–" + slash(end) + "）" : "") + "。"
+    ));
+    faqA.insertBefore(note, faqA.firstChild);
+  }
+
   var countEl = document.getElementById("combo-count");
   var addBtn = document.getElementById("combo-add");
   var opts = [].slice.call(sec.querySelectorAll(".combo-opt"));
