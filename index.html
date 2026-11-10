@@ -255,7 +255,7 @@
 
      要先看版面長什麼樣：網址加 ?preview=combo，會強制顯示並標明客人看不到。 -->
 <section class="combo" id="combo" hidden
-         data-live="on"
+         data-live="off"
          data-start="2026-11-03" data-end="2026-11-09"
          data-size="5" data-price="900" data-compare="950">
   <div class="container">
@@ -757,6 +757,14 @@
           <option value="單包|280">單包 $280</option>
           <option value="3包|800">3包 $800</option>
         </select>
+        <!-- 米酒三選一。有客人不要酒（小孩吃、長輩、不喝酒），以前得在 LINE 另外交代，
+             容易漏掉；放進下拉，訂單會直接寫成「客家純麻油雞（單包・不加米酒）」。
+             預設「有米酒」＝原本的做法，所以沒注意到這個下拉的客人拿到的跟以前一樣。 -->
+        <select class="item-option" aria-label="客家純麻油雞 米酒">
+          <option value="有米酒" selected>有米酒</option>
+          <option value="酒煮掉">酒煮掉</option>
+          <option value="不加米酒">不加米酒</option>
+        </select>
         <button class="btn btn-add" data-name="客家純麻油雞">加入</button>
       </div>
       <div class="menu-item">
@@ -1039,6 +1047,11 @@
         <div class="faq-a">
           <p><b>任何客製調整的需求，都可以在訂購時討論</b>，在能夠客製的範圍內我們會盡可能協助您。</p>
           <p>直接在 LINE 跟老闆家說就好。</p>
+          <!-- 這兩項已經做成購物車下拉，不用再另外交代。搜「不要米酒」的人會找到這條，
+               所以要在這裡講，否則他會以為還得自己開口。新增可選項目時記得補到這裡。 -->
+          <p>其中這兩項<b>可以直接在購物車選</b>，不用另外講：<br>
+            <b>客家純麻油雞</b> — 有米酒／酒煮掉／不加米酒<br>
+            <b>泰式打拋豬肉</b> — 不辣／微辣／小辣</p>
         </div>
       </details>
 
