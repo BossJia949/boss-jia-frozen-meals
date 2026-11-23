@@ -1,9 +1,13 @@
 (function () {
-  // 隱藏版限時特賣。跟 #combo 的差別有兩個：
-  //   ① 多一把鎖 —— 網址要帶專屬 key（data-key）才看得到，不給連結就找不到。
-  //   ② 一次給好幾個組合（固定組合 ＋ 一個任選），不是單一個任選池。
+  // 「隱藏版」限時特賣。
   //
-  // 設定全部讀 HTML 上的 data-*，換檔期／換價格／換品項都只要改 index.html。
+  // ⚠️ 這裡的「隱藏版」是**商品的說法**（這兩款平常不在菜單上，像餐廳的隱藏版菜單），
+  //    **不是技術上的隱藏**。所有客人都看得到，顯示條件跟 #combo 完全一樣。
+  //    2026-11-23 第一版曾經做成「網址要帶 ?vip 才看得到」—— 那是誤解老闆家的意思，
+  //    當天就改掉了。**不要再把這塊做成憑連結存取。**
+  //
+  // 跟 #combo 的差別只剩一個：一次給好幾個組合（固定組合 ＋ 一個任選），
+  // 不是單一個任選池。設定全部讀 HTML 的 data-*，換檔期／價格／品項只要改 index.html。
   var sec = document.getElementById("secret");
   if (!sec) return;
 
@@ -12,25 +16,16 @@
   // 版面預覽用（老闆家自己看）。會標明客人看不到，免得以為已經開賣了。
   var PREVIEW = /[?&]preview=secret(&|$)/.test(location.search);
 
-  var KEY = sec.dataset.key || "";
-  // ?vip 這種沒有等號的參數，URLSearchParams.has() 一樣讀得到
-  var hasKey = !!KEY && new URLSearchParams(location.search).has(KEY);
-
   var g = C.read(sec);
 
-  // ── 四個條件同時成立才看得到，缺一個就整塊移除 ──
-  //   ① data-live="on"    人工開關，預設 off。沒人點頭，日期到了也不會上架
-  //   ② 起訖日兩個都填齊
-  //   ③ 今天在起訖日之間（含當天）。過期自動下架
-  //   ④ 網址帶了 data-key 指定的參數 ← 這把鎖是「隱藏版」的意思
-  //
-  // ⚠️ 第④點是「不給連結就看不到」，**不是加密**。這段文字仍然在 index.html 的
-  //    原始碼裡，有心人看原始碼找得到。要真的藏，得改成後端渲染 —— 這個站是純靜態的，
-  //    做不到。所以隱藏版不要放不能被看到的東西，它的作用是「特別感」不是保密。
+  // ── 三個條件同時成立才看得到，缺一個就整塊移除 ──
+  //   ① data-live="on"  人工開關，預設 off。沒人點頭，日期到了也不會上架
+  //   ② 起訖日兩個都填齊。只填一個 = 設定沒寫完 = 不顯示
+  //   ③ 今天在起訖日之間（含當天）。過期自動下架，不用回來處理
   //
   // 區塊在 HTML 裡預設帶 hidden，所以連 JS 沒跑到也是不顯示。
   // 失敗方向永遠是「看不到」。
-  if (!(g.live && g.inRange && hasKey) && !PREVIEW) {
+  if (!(g.live && g.inRange) && !PREVIEW) {
     sec.remove();
     return;
   }
@@ -38,14 +33,13 @@
 
   var datesEl = document.getElementById("secret-dates");
   if (datesEl) {
-    var draft = !g.live || !g.inRange || !hasKey;
+    var draft = !g.live || !g.inRange;
     // 預覽時要講清楚卡在哪一關，才知道還差什麼沒做
-    var why = !g.live ? "草稿（data-live 還不是 on）"
-            : !g.inRange ? "不在檔期內"
-            : "網址沒帶 ?" + KEY;
+    var why = !g.live ? "草稿（data-live 還不是 on）" : "不在檔期內";
     datesEl.textContent = draft
       ? "👁 預覽模式．客人看不到　‧　" + why + "：" + g.range
-      : "活動期間 " + g.range + "　‧　菜單上沒有，只有這一檔買得到";
+      // 「菜單上沒有」那句留給底下的 .secret-sub 講，這裡只報檔期，不要講兩次
+      : "活動期間 " + g.range;
     datesEl.classList.toggle("is-preview", draft);
   }
 
