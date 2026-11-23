@@ -225,9 +225,99 @@
 
 <main>
 
-<!-- ══ 限時組合（任選 N 包）══ 目前狀態：上線中，11/3–11/9 ══
+<!-- ══ 隱藏版限時特賣 ══ 目前狀態：上線中，11/23–11/28 ══
 
-     這一檔是 2026-11-03 老闆家拍板的：雞湯任選 5 包 $900，到 11/9（一）止。
+     老闆家 2026-11-23 拍板。義式番茄肉醬與日式肉味噌兩款**菜單上沒有**，
+     只有這一檔買得到。三個組合：A／B 各 5 包 $750，C 兩種任選 10 包 $1400。
+
+     要客人看得到，四個條件必須同時成立（缺一個就整塊從頁面移除）：
+       ① data-live="on"   人工開關，預設 off。沒人點頭，日期到了也不會上架
+       ② data-start / data-end 兩個都有填（YYYY-MM-DD，含當天）
+       ③ 今天在起訖日之間 —— 11/29 起自動下架，不用回來處理
+       ④ 網址帶 ?vip（就是 data-key 那個字）← 這把鎖就是「隱藏版」
+
+     ⚠️ ④是「不給連結就看不到」，**不是加密**。這段文字還是在原始碼裡，
+     有心人翻 HTML 找得到。純靜態網站做不到真正的隱藏。
+     所以這裡不要放不能被看到的東西 —— 它的作用是「特別感」，不是保密。
+
+     發給客人的網址：https://bossjia.net/?vip
+     要換一組暗號就改 data-key，網址跟著改成 ?你填的字。
+
+     單包價（一包 $150／$140）是 js/secret.js 用組合價除出來的，不寫死 ——
+     改了組合價忘了改單包價，客人眼前就會出現兩個對不起來的數字。
+
+     要先看版面：網址加 ?preview=secret，會強制顯示並標明客人看不到。 -->
+<section class="secret" id="secret" hidden
+         data-live="on"
+         data-start="2026-11-23" data-end="2026-11-28"
+         data-key="vip">
+  <div class="container">
+    <p class="secret-flag">🔒 隱藏版．限時特賣</p>
+    <h2 class="secret-title">手作肉醬雙享</h2>
+    <p class="secret-dates" id="secret-dates"></p>
+    <p class="secret-sub">
+      <b>義式番茄肉醬</b>與<b>日式肉味噌</b>，每包 150 克，大約一人份。<br>
+      這兩款沒有放在菜單上，只有這一檔買得到。
+    </p>
+
+    <div class="secret-grid">
+      <div class="secret-card"
+           data-name="義式番茄肉醬 5 包組" data-variant="150 克 × 5 包"
+           data-price="750" data-count="5">
+        <p class="secret-card-label">A 組合</p>
+        <h3 class="secret-card-name">義式番茄肉醬 × 5</h3>
+        <p class="secret-card-price">NT$750</p>
+        <p class="secret-card-unit"></p>
+        <button type="button" class="btn btn-primary secret-add">加入購物車</button>
+      </div>
+
+      <div class="secret-card"
+           data-name="日式肉味噌 5 包組" data-variant="150 克 × 5 包"
+           data-price="750" data-count="5">
+        <p class="secret-card-label">B 組合</p>
+        <h3 class="secret-card-name">日式肉味噌 × 5</h3>
+        <p class="secret-card-price">NT$750</p>
+        <p class="secret-card-unit"></p>
+        <button type="button" class="btn btn-primary secret-add">加入購物車</button>
+      </div>
+
+      <div class="secret-card secret-pick"
+           data-name="肉醬任選 10 包組" data-size="10" data-price="1400">
+        <p class="secret-card-label">C 組合</p>
+        <h3 class="secret-card-name">兩種口味任選 × 10</h3>
+        <p class="secret-card-price">NT$1,400</p>
+        <p class="secret-card-unit"></p>
+        <ul class="combo-pool">
+          <li class="combo-opt" data-name="義式番茄肉醬">
+            <span class="combo-opt-name">義式番茄肉醬</span>
+            <span class="combo-steps">
+              <button type="button" class="combo-step" data-step="-1" aria-label="義式番茄肉醬 減一包">−</button>
+              <span class="combo-qty" data-qty>0</span>
+              <button type="button" class="combo-step" data-step="1" aria-label="義式番茄肉醬 加一包">＋</button>
+            </span>
+          </li>
+          <li class="combo-opt" data-name="日式肉味噌">
+            <span class="combo-opt-name">日式肉味噌</span>
+            <span class="combo-steps">
+              <button type="button" class="combo-step" data-step="-1" aria-label="日式肉味噌 減一包">−</button>
+              <span class="combo-qty" data-qty>0</span>
+              <button type="button" class="combo-step" data-step="1" aria-label="日式肉味噌 加一包">＋</button>
+            </span>
+          </li>
+        </ul>
+        <div class="combo-bar">
+          <p class="combo-count" id="secret-count" role="status" aria-live="polite"></p>
+          <button type="button" class="btn btn-primary" id="secret-add" disabled>加入購物車</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 限時組合（任選 N 包）══ 目前狀態：已收攤，開關在 off ══
+
+     上一檔是 2026-11-03 老闆家拍板的：雞湯任選 5 包 $900，到 11/9（一）止。
+     檔期結束後 data-live 已撥回 off，現在這塊是下一檔要重用的空模板。
 
      data-compare 填 950 的依據：混搭只能用單包價買，$190×5＝$950，所以是省 $50。
      （菜單上「3包 $550」那個規格要同口味，混搭的人用不到，不能拿來當對照。）
@@ -1258,7 +1348,10 @@
 
 <script src="js/cart.js"></script>
 <!-- combo 要用 cart.js 建好的 window.BossJiaCart，所以一定排在它後面 -->
+<!-- campaign.js 放了兩個檔期區塊共用的把關與選單邏輯，所以要排在它們兩個前面 -->
+<script src="js/campaign.js"></script>
 <script src="js/combo.js"></script>
+<script src="js/secret.js"></script>
 <script src="js/faq.js"></script>
 <script src="js/ui.js"></script>
 </body>

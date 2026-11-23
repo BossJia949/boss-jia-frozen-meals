@@ -1212,3 +1212,66 @@ section { padding: 64px 0; }
   .story-body p { font-size: 0.95rem; line-height: 1.95; }
   .story-timeline { grid-template-columns: repeat(2, 1fr); gap: 20px 12px; }
 }
+
+/* ── 隱藏版限時特賣（#secret）──
+   沿用 .combo-* 的選單零件（.combo-pool / .combo-opt / .combo-step / .combo-bar），
+   那些規則本來就是純 class、沒綁在 .combo 底下，所以直接放進來就能用。
+   只有外框與三張卡片是這一區自己的。 */
+.secret {
+  background: var(--ink);                 /* 比 .combo 的 --surface 更深，一看就知道是另一回事 */
+  border-top: 3px solid var(--gold-light);
+  border-bottom: 3px solid var(--gold-light);
+  padding: 32px 0;
+  margin-bottom: 8px;
+}
+.secret-flag {
+  display: inline-block;
+  background: var(--gold-light);
+  color: var(--green-deepest);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  padding: 4px 14px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+}
+.secret-title { font-size: 1.6rem; color: var(--gold-light); margin-bottom: 6px; }
+.secret-dates { color: var(--text); font-weight: 700; margin-bottom: 4px; }
+.secret-dates.is-preview { color: var(--gold-light); }
+.secret-sub { color: var(--text-mute); font-size: 0.9rem; line-height: 1.7; margin-bottom: 20px; }
+
+.secret-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+  align-items: start;
+}
+.secret-card {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 16px;
+  text-align: center;
+}
+/* 任選那張要放兩個品項與計數列，給它整排的寬度，站在兩張固定組合下面 */
+.secret-pick { grid-column: 1 / -1; border-color: var(--gold-light); }
+
+.secret-card-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--gold-light);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.secret-card-name { font-size: 1.05rem; color: var(--text); margin-bottom: 8px; }
+.secret-card-price { font-size: 1.5rem; font-weight: 700; color: var(--gold); line-height: 1.2; }
+.secret-card-unit { font-size: 0.8rem; color: var(--text-mute); margin-bottom: 14px; }
+.secret-card .btn { width: 100%; }
+
+.secret-pick .combo-pool { margin: 4px 0 12px; }
+.secret-pick .combo-bar { margin-top: 0; }
+
+@media (max-width: 600px) {
+  .secret-title { font-size: 1.35rem; }
+  .secret-card-price { font-size: 1.35rem; }
+}
