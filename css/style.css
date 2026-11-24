@@ -1239,6 +1239,9 @@ section { padding: 64px 0; }
 .secret-dates { color: var(--text); font-weight: 700; margin-bottom: 4px; }
 .secret-dates.is-preview { color: var(--gold-light); }
 .secret-sub { color: var(--text-mute); font-size: 0.9rem; line-height: 1.7; margin-bottom: 20px; }
+/* 一段話要折就整段一起折，不要從中間拆開（手機上「（一包可／以做兩份拌麵）」就是這樣被拆的）。
+   inline-block 讓它在放得下時跟前面同一行，放不下才整段移到下一行。 */
+.keep { display: inline-block; }
 
 .secret-grid {
   display: grid;
